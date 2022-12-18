@@ -20,10 +20,10 @@ const login = ( email, password ) => (
     })
     .then((res) => {
         if (res.data.accessToken) {
-            localStorage.setItem('staff', JSON.stringify(response.data))
+            localStorage.setItem('staff', JSON.stringify(res.data))
         }
 
-        return response.data;
+        return res.data;
     })
 )
 
