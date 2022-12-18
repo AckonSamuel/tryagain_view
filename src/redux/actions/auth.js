@@ -94,3 +94,9 @@ const logout = () => (dispatch) => {
         }
     )
 }
+
+export {
+    register,
+    login,
+    logout,
+};
