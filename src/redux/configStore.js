@@ -1,10 +1,17 @@
-import { combineReducers, combineReducers } from '@reduxjs/toolkit';
+import { applyMiddleware, combineReducers, combineReducers, configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import auth from './auth';
-import message from './message';
+import authReducer from './reducers/auth';
+import messageReducer from './reducers/message';
 
-export default combineReducers({
-    auth,
-    message,
+const MyMiddlewares = [thunk, logger];
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    message: messageReducer,
 });
+
+const store = configureStore({
+    reducer: rootReducer,
+}, applyMiddleware(...MyMiddlewares));
+
+export default store;
