@@ -20,7 +20,7 @@ const required = value => {
 };
 
 
-const email = value => {
+const vemail = value => {
     if (!isEmail(value)) {
         return (
             <div className='alert alert-danger' role='alert'>
@@ -94,7 +94,7 @@ const Login = (props) => {
                             className='form-control'
                             value={email}
                             onChange={onChangeEmail}
-                            validations={[required, email]}
+                            validations={[required, vemail]}
                             />
                     </div>
 
@@ -132,3 +132,5 @@ const Login = (props) => {
         </div>
     }
 }
+
+export default Login;
