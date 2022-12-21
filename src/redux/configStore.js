@@ -1,17 +1,22 @@
-import { applyMiddleware, combineReducers, combineReducers, configureStore } from '@reduxjs/toolkit';
+import { applyMiddleware, configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import authReducer from './reducers/auth';
-import messageReducer from './reducers/message';
+import logger from 'redux-logger';
 
-const MyMiddlewares = [thunk, logger];
+import staffReducer from './slices/loginSlice';
 
-const rootReducer = combineReducers({
-    auth: authReducer,
-    message: messageReducer,
-});
+const MyMiddlewares = [logger];
+
+// const rootReducer = combineReducers({
+//     auth: authReducer,
+//     message: messageReducer,
+//     staff: staffReducer,
+// });
 
 const store = configureStore({
-    reducer: rootReducer,
-}, applyMiddleware(...MyMiddlewares));
+    reducer: {
+        staff: staffReducer,
+    },
+    
+}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default store;

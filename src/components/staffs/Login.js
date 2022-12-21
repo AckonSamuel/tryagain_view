@@ -1,136 +1,49 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { staffLogin } from '../../redux/slices/loginSlice';
 
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
-
-import { login } from './../../redux/actions/auth';
-
-const required = value => {
-    if(!value) {
-        return (
-            <div className='alert alert-danger' role='alert'>
-                This field is required!
-            </div>
-        );
-    }
-};
-
-
-const vemail = value => {
-    if (!isEmail(value)) {
-        return (
-            <div className='alert alert-danger' role='alert'>
-                This is not a valid email
-            </div>
-        );
-    }
-};
-
-
-const Login = (props) => {
+export default function Login() {
+    const { register, getValues, handleSubmit } = useForm();
     let navigate = useNavigate();
-
-    const form = useRef();
-    const checkBtn = useRef();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    const {isLoggedIn} = useSelector(state => state.auth, shallowEqual);
-    const {message} = useSelector(state => state.message, shallowEqual);
+    // const check = true;
+    // const [loading, setLoading] = useState(false);
+    // const authr = useSelector(state => state.auth, shallowEqual);
+    // const {message} = useSelector(state => state.message, shallowEqual);
 
     const dispatch = useDispatch();
 
-    const onChangeEmail = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-    }
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
+    const showdata = () => { 
+        const data = getValues();
+        dispatch(staffLogin(data));
+        // if(check) {
+        //     dispatch(login(data))
+        //     .then(() => {
+        //         navigate('/');
+        //         window.location.reload();
+        //     })
+        //     .catch(err => {
+        //         setLoading(false);
+        //         alert(err.message);
+        //     });
+        // } else {
+        //     setLoading(false);
+        // }
     };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        setLoading(true);
+    const staff_data = useSelector(state => state.staff.staff.id);
+    const stateLoading = useSelector(state => state.staff.loading);
 
-        form.current.validateAll();
+    return (
+        <>
+        <form onSubmit={handleSubmit(showdata)}>
+            <input {...register('email')} />
+            <input {...register('password')} />
+            <input type='submit' value='login' />
+        </form>
+        <div><h1>{staff_data ? staff_data.role : 'hello'}</h1></div>
+        </>
 
-        if(checkBtn.current.context._errors.length === 0) {
-            dispatch(login(email, password))
-               .then(() => {
-                    navigate('/');
-                    window.location.reload();
-                })
-               .catch(err => {
-                    setLoading(false);
-                    alert(err.message);
-                });
-        } else {
-            setLoading(false);
-        }
-    }
-
-    if (isLoggedIn()) {
-        <div className='col-md-12'>
-            <div className='card card-container'>
-                <img 
-                src='//ssl.gstatic.com/accounts/ui/avatar_2x.png' 
-                alt='profile-img'
-                className='profile-img-card'
-                />
-                <Form onSubmit={handleLogin} ref={form}>
-                    <div className='form-group'>
-                        <label htmlFor='email'>Email</label>
-                        <Input
-                            type='email'
-                            name='email'
-                            className='form-control'
-                            value={email}
-                            onChange={onChangeEmail}
-                            validations={[required, vemail]}
-                            />
-                    </div>
-
-                    <div className='form-group'>
-                        <label htmlFor='password'>Password</label>
-                        <Input
-                            type='password'
-                            name='password'
-                            className='form-control'
-                            value={password}
-                            onChange={onChangePassword}
-                            validations={[required]}
-                        />
-                    </div>
-
-                    <div className='form-group'>
-                        <button className='btn btn-primary btn-block' disabled={loading}>
-                            {loading && (
-                                <span className='spinner-border spinner-border-sm' role='status'></span>
-                            )}
-                            <span>Login</span>
-                        </button>                  
-                    </div>
-
-                    {message && (
-                        <div className='form-group'>
-                            <div className='alert alert-danger' role='alert'>
-                                {message}
-                            </div>
-                        </div>
-                    )}
-                    <CheckButton style={{ display: 'none' }} ref={{checkBtn}} />
-                </Form>
-            </div>
-        </div>
-    }
+    );
 }
-
-export default Login;

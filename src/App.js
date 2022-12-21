@@ -1,25 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from './components/staffs/Login';
-import Register from './components/staffs/Register';
-import logout from './redux/services/staffs';
-import { clearMessage } from './redux/actions/messages';
+import {logout} from './redux/actions/auth';
 import "./App.css";
 
 const App = () => {
-    const { staff: currentStaff } = useSelector((state) => state.auth);
+    const { staff: currentStaff } = useSelector((state) => state.staff.staff);
     const dispatch = useDispatch();
-
-    let location = useLocation();
-
-    useEffect(() => {
-        if (['/login', '/register'].includes(location.pathname)) {
-            dispatch(clearMessage()); //clear message when changing location
-        }
-    }, [dispatch, location]);
 
     const logOut = useCallback(() => {
         dispatch(logout());
