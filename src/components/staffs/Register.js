@@ -58,9 +58,9 @@ export default function Register() {
     const showdata = () => { 
         const data = getValues();
         console.log(data);
-        // dispatch(staffSignUp(data)).then(() => {
-        //     navigate("/error");
-        //   });
+        dispatch(staffSignUp(data)).then(() => {
+            navigate("/error");
+          });
     };
     
     console.log(errors);
@@ -116,7 +116,7 @@ export default function Register() {
           <p>{ errors.password_confirmation ? errors.password_confirmation.message : ''}</p>
             </FormControl>
             <TextField {...register('role')}  id='outlined-basic' label='role' variant='outlined' />
-            <TextField {...register('name')}  id='outlined-basic' label='name' variant='outlined' />
+            <TextField {...register('staff_name')}  id='outlined-basic' label='name' variant='outlined' />
             <TextField {...register('phone_number')}  id='outlined-basic' label='Phone number' variant='outlined' />
             <Button variant="contained" type='sumbit' sx={{ margin: '10px'}} >Register</Button>
         </form>
