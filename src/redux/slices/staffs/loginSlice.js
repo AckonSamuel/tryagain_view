@@ -45,4 +45,4 @@ const staffSlice = createSlice({
     }
 });
 
-export default staffSlice.reducer;
+export default staffSlice;
