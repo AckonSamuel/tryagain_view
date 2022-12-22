@@ -7,10 +7,10 @@ const initialState = {
     loading: false,
 }
 
-export const clubLogin = createAsyncThunk(
-    'club/clubLogin',
+export const clubSignUp = createAsyncThunk(
+    'club/clubSignUP',
     async (club) => 
-       await axios.post('http://localhost:3000/auth/clubs/login', {club})
+       await axios.post('http://localhost:3000/auth/clubs/signup', {club})
     .then((res) => {
         if (res.data.accessToken) {
             localStorage.setItem('club', JSON.stringify(res.data))
@@ -20,24 +20,24 @@ export const clubLogin = createAsyncThunk(
     })
 )
 
-const clubLoginSlice = createSlice({
+const clubRegisterSlice = createSlice({
     name: 'club',
     initialState,
     reducers: {},
     extraReducers:(builder)=>{
-        builder.addCase(clubLogin.pending, (state) => { 
+        builder.addCase(clubSignUp.pending, (state) => { 
             state.loading = true;
             state.club = {};
             state.error = '';
         })
-        builder.addCase(clubLogin.fulfilled, (state, action) => {
+        builder.addCase(clubSignUp.fulfilled, (state, action) => {
             console.log(action.payload);
             state.club = action.payload.data;
             state.loading = false;
             state.error = '';
             console.log(state.club);
         })
-        builder.addCase(clubLogin.rejected, (state, action) => {
+        builder.addCase(clubSignUp.rejected, (state, action) => {
             state.error = action.error.message;
             state.loading = false;
             state.club = {};
@@ -45,4 +45,4 @@ const clubLoginSlice = createSlice({
     }
 });
 
-export default clubLoginSlice;
+export default clubRegisterSlice;
