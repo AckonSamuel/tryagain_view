@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -16,10 +16,44 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { staffSignUp } from '../../redux/slices/staffs/registerSlice';
 
+
+const formSchema = Yup.object({
+    password: Yup.string()
+      .required("Password is required")
+      .min(4, "Password length should be at least 4 characters")
+      .max(12, "Password cannot exceed more than 12 characters"),
+    password_confirmation: Yup.string()
+      .required("Confirm Password is required")
+      .min(4, "Password length should be at least 4 characters")
+      .max(12, "Password cannot exceed more than 12 characters")
+      .oneOf([Yup.ref("password")], "Passwords do not match")
+  }).required();
+
 export default function Register() {
-    const { register, getValues, handleSubmit } = useForm();
     let navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (e) =>  {
+        e.preventDefault();
+    };
+
+    let password;
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+        watch,
+        getValues
+      } = useForm({
+        mode: "onTouched",
+        resolver: yupResolver(formSchema)
+      });
+
+      password = watch("password", "");
 
     const showdata = () => { 
         const data = getValues();
@@ -29,21 +63,15 @@ export default function Register() {
         //   });
     };
     
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (e) =>  {
-        e.preventDefault();
-    };
+    console.log(errors);
 
     return (
         <Box
-        sx={{ display: 'flex', flexWrap: 'wrap', margin: '200px'}}
-        notValidate
+        sx={{ display: 'flex', flexWrap: 'wrap' }}
         autoComplete='off'>
         <form onSubmit={handleSubmit(showdata)}>
-            <TextField {...register('email')}  id='outlined-basic' label='email' variant='outlined' sx={{ margin: '10px'}}/>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+            <TextField {...register('email')}  id='outlined-basic' label='email' variant='outlined' />
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -63,11 +91,12 @@ export default function Register() {
             label="Password"
             {...register('password')}
           />
+          <p>{ errors.password ? errors.password.message : ''}</p>
         </FormControl>
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="outlined-basic"
             type={showPassword ? 'text' : 'password'}
             endAdornment={
               <InputAdornment position="end">
@@ -81,14 +110,14 @@ export default function Register() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label="Confirm Password"
             {...register('password_confirmation')}
           />
-        </FormControl>
-            {/* <TextField {...register('password_confirmation')}  id='outlined-basic' label='Confirm Password' variant='outlined' sx={{ margin: '10px'}} /> */}
-            <TextField {...register('role')}  id='outlined-basic' label='role' variant='outlined' sx={{ margin: '10px'}} />
-            <TextField {...register('name')}  id='outlined-basic' label='name' variant='outlined' sx={{ margin: '10px'}} />
-            <TextField {...register('phone_number')}  id='outlined-basic' label='Phone number' variant='outlined' sx={{ margin: '10px'}} />
+          <p>{ errors.password_confirmation ? errors.password_confirmation.message : ''}</p>
+            </FormControl>
+            <TextField {...register('role')}  id='outlined-basic' label='role' variant='outlined' />
+            <TextField {...register('name')}  id='outlined-basic' label='name' variant='outlined' />
+            <TextField {...register('phone_number')}  id='outlined-basic' label='Phone number' variant='outlined' />
             <Button variant="contained" type='sumbit' sx={{ margin: '10px'}} >Register</Button>
         </form>
         </Box>
