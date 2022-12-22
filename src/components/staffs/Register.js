@@ -26,7 +26,17 @@ const formSchema = Yup.object({
       .required("Confirm Password is required")
       .min(4, "Password length should be at least 4 characters")
       .max(12, "Password cannot exceed more than 12 characters")
-      .oneOf([Yup.ref("password")], "Passwords do not match")
+      .oneOf([Yup.ref("password")], "Passwords do not match"),
+    email: Yup.string()
+     .required("Email is required"),
+    staff_name: Yup.string()
+    .required('Name is required'),
+    role: Yup.string()
+    .required('Role is required, e.g. Lecturer, Lab technician'),
+    phone_number: Yup.number()
+    .required('Phone number is required')
+    .min(10, 'Should contain at least 10 digits')
+    .max(15, 'Cannot exceed 15 digits')
   }).required();
 
 export default function Register() {
@@ -71,6 +81,7 @@ export default function Register() {
         autoComplete='off'>
         <form onSubmit={handleSubmit(showdata)}>
             <TextField {...register('email')}  id='outlined-basic' label='email' variant='outlined' />
+            <p>{ errors.email ? errors.email.message : ''}</p>
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -116,8 +127,11 @@ export default function Register() {
           <p>{ errors.password_confirmation ? errors.password_confirmation.message : ''}</p>
             </FormControl>
             <TextField {...register('role')}  id='outlined-basic' label='role' variant='outlined' />
+            <p>{ errors.role ? errors.role.message : ''}</p>
             <TextField {...register('staff_name')}  id='outlined-basic' label='name' variant='outlined' />
+            <p>{ errors.staff_name ? errors.staff_name.message : ''}</p>
             <TextField {...register('phone_number')}  id='outlined-basic' label='Phone number' variant='outlined' />
+            <p>{ errors.phone_number ? errors.phone_number.message : ''}</p>
             <Button variant="contained" type='sumbit' sx={{ margin: '10px'}} >Register</Button>
         </form>
         </Box>
