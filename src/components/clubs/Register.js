@@ -129,8 +129,8 @@ export default function Register() {
             <p>{ errors.group ? errors.group.message : ''}</p>
             <TextField {...register('club_name')}  id='outlined-basic' label='name' variant='outlined' />
             <p>{ errors.club_name ? errors.club_name.message : ''}</p>
-            <TextField {...register('phone_number')}  id='outlined-basic' label='Phone number' variant='outlined' />
-            <p>{ errors.phone_number ? errors.phone_number.message : ''}</p>
+            <TextField {...register('telephone_number')}  id='outlined-basic' label='telephone number' variant='outlined' />
+            <p>{ errors.telephone_number ? errors.telephone_number.message : ''}</p>
             <Button variant="contained" type='sumbit' sx={{ margin: '10px'}} >Register</Button>
         </form>
         </Box>
