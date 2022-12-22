@@ -20,7 +20,7 @@ export const studentLogin = createAsyncThunk(
     })
 )
 
-const studentSlice = createSlice({
+const studentLoginSlice = createSlice({
     name: 'student',
     initialState,
     reducers: {},
@@ -45,4 +45,4 @@ const studentSlice = createSlice({
     }
 });
 
-export default studentSlice;
+export default studentLoginSlice;
