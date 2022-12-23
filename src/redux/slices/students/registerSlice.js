@@ -7,10 +7,10 @@ const initialState = {
     loading: false,
 }
 
-export const clubSignUp = createAsyncThunk(
-    'student/clubSignUP',
+export const studentSignUp = createAsyncThunk(
+    'student/studentSignUP',
     async (student) => 
-       await axios.post('http://localhost:3000/auth/clubs/signup', {student})
+       await axios.post('http://localhost:3000/auth/students/signup', {student})
     .then((res) => {
         if (res.data.accessToken) {
             localStorage.setItem('student', JSON.stringify(res.data))
@@ -25,19 +25,19 @@ const studentRegisterSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers:(builder)=>{
-        builder.addCase(clubSignUp.pending, (state) => { 
+        builder.addCase(studentSignUp.pending, (state) => { 
             state.loading = true;
             state.student = {};
             state.error = '';
         })
-        builder.addCase(clubSignUp.fulfilled, (state, action) => {
+        builder.addCase(studentSignUp.fulfilled, (state, action) => {
             console.log(action.payload);
             state.student = action.payload.data;
             state.loading = false;
             state.error = '';
             console.log(state.student);
         })
-        builder.addCase(clubSignUp.rejected, (state, action) => {
+        builder.addCase(studentSignUp.rejected, (state, action) => {
             state.error = action.error.message;
             state.loading = false;
             state.student = {};

@@ -11,7 +11,6 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { staffLogin } from '../redux/slices/staffs/loginSlice';
 
 function Copyright(props) {
   return (
@@ -31,6 +30,24 @@ const theme = createTheme();
 export default function SplashScreen() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const studentLogin = () => {
+      dispatch(() => {
+        navigate('auth/students/login');
+      })
+    }
+
+    const staffLogin = () => {
+      dispatch(() => {
+        navigate('auth/staffs/login');
+      })
+    }
+
+    const clubLogin = () => {
+      dispatch(() => {
+        navigate('auth/clubs/login');
+      })
+    }
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,6 +103,7 @@ export default function SplashScreen() {
                 variant="contained"
                 id='login-btn'
                 sx={{ mt: 3, mb: 2, backgroundColor: 'green' }}
+                onClick={studentLogin}
               >
             Explore as Student
               </Button>
@@ -95,6 +113,7 @@ export default function SplashScreen() {
                 variant="contained"
                 id='login-btn'
                 sx={{ mt: 3, mb: 2, backgroundColor: 'green' }}
+                onClick={clubLogin}
               >
             Explore as Club
               </Button>
@@ -104,6 +123,7 @@ export default function SplashScreen() {
                 variant="contained"
                 id='login-btn'
                 sx={{ mt: 3, mb: 2, backgroundColor: 'green' }}
+                onClick={staffLogin}
               >
             Explore as Staff
               </Button>

@@ -24,7 +24,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { staffLogin } from '../../redux/slices/staffs/loginSlice';
+import { clubLogin } from '../../redux/slices/clubs/loginSlice';
 
 function Copyright(props) {
   return (
@@ -48,7 +48,7 @@ const formSchema = Yup.object({
      .required("Email is required"),
   }).required();
 
-export default function SignInSide() {
+export default function ClubLogin() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ export default function SignInSide() {
 
       const showdata = () => { 
         const data = getValues();
-        dispatch(staffLogin(data)).then(() => {
+        dispatch(clubLogin(data)).then(() => {
             navigate("/error");
           });
     };

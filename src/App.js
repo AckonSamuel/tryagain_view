@@ -1,8 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Routes, Route, Link } from "react-router-dom";
-import Login from "./components/staffs/Login";
-import Register from "./components/staffs/Register";
+import { Routes, Route} from "react-router-dom";
+import StaffLogin from "./components/staffs/StaffLogin";
+import StaffRegister from "./components/staffs/StaffRegister";
+import StudentLogin from './components/students/StudentLogin';
+import StudentRegister from './components/students/StudentRegister';
+import ClubLogin from './components/clubs/ClubLogin';
+import ClubRegister from './components/clubs/ClubRegister';
 import logOut from "./redux/services/staffs/staff.service";
 import SplashScreen from './components/SplashScreen';
 import "./App.css";
@@ -12,28 +16,12 @@ const App = () => {
 
     return (
         <>
-        <nav>      
-            <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                    Register
-                </Link>
-                <Link className="nav-link" to="/splashscreen">
-                    Homepage
-                </Link>
-                <Link className="nav-link" to="/login">
-                    Login
-                </Link>
-                <button className="btn" onClick={ () => {
-                    dispatch(logOut);
-                }}>Logout </button>
-            </li>
-        </div>
-        </nav><div className="container mt-3">
+<div className="container mt-3">
                 <Routes>
-                    <Route path="/splashscreen" element={<SplashScreen />} />
-                    <Route path='/register' element={<Register />}/>
-                    <Route path='/login' element={<Login />} />
+                    <Route path="/" element={<SplashScreen />} />
+                    <Route path='auth/staffs/login' element={<StaffLogin />} />
+                    <Route path='auth/students/login' element={<StudentLogin />} />
+                    <Route path='auth/clubs/login' element={<ClubLogin />} />
                 </Routes>
             </div>
         </>
