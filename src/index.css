@@ -15,6 +15,7 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 label {
@@ -28,4 +29,8 @@ label {
 
 #login-btn:hover {
   background-color: rgb(9, 95, 9);
+}
+
+.co {
+  color: rgb(112, 106, 106);
 }

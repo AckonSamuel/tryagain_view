@@ -21,7 +21,6 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { clubLogin } from '../../redux/slices/clubs/loginSlice';
@@ -83,7 +82,7 @@ export default function ClubLogin() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh'}}>
         <CssBaseline />
         <Grid
           item
@@ -98,38 +97,45 @@ export default function ClubLogin() {
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            backgroundClip: 'padding-box'
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} maxWidth="xs" elevation={6} square component={Paper}>
           <Box
-            sx={{
-              my: 8,
-              mx: 4,
+             sx={{
+              marginTop: 7,
+              marginLeft: 11,
+              padding: 4,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              boxShadow: 5,
+              width: '70%',
+              height: '80%',
             }}
           >
-                 <Box
+          <Box
         component="img"
         sx={{
           height: 120,
           width: 80,
-          marginBottom: 9,
+          marginBottom: 2,
           maxHeight: { xs: 233, md: 167 },
           maxWidth: { xs: 350, md: 250 },
+          marginRight: 2
         }}
         alt="The house from the offer."
         src="https://www.freelogovectors.net/wp-content/uploads/2022/03/knust_logo_freelogovectors.net_.png"
       />
-
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit(showdata)} sx={{ mt: 1 }}>
+          <Typography component="h1" variant="h5"
+          sx={{
+            marginBottom: 2,
+            marginRight: 4
+          }}>
+            Club Sign in
+          </Typography>
+            <Box component="form" onSubmit={handleSubmit(showdata)} sx={{ mt: 1 }}>
                 <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
               <TextField
                 {...register('email')}  
@@ -138,8 +144,8 @@ export default function ClubLogin() {
               variant='outlined' 
                 autoComplete="email"
                 autoFocus
+                required
               />
-              <p className='alert-login'>{ errors.email ? errors.email.message : ''}</p>
               </FormControl>
             <FormControl sx={{ m: 1, width: '100%',  }} variant="outlined" >
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -163,8 +169,8 @@ export default function ClubLogin() {
             label="Password"
             {...register('password')}
             sx={{ marginBottom: 1}}
+            required
           />
-          <p className='alert-login'>{ errors.password ? errors.password.message : ''}</p>
         </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -181,19 +187,21 @@ export default function ClubLogin() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2" >
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/auth/clubs/register" variant="body2">
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              
             </Box>
+            
           </Box>
+          <Copyright sx={{ mt: 7 }} />
         </Grid>
       </Grid>
     </ThemeProvider>
