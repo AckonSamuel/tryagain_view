@@ -11,7 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 label {
   margin-top: 0;
+}
+
+.alert-login {
+  color: red;
+  font-size: 0.7em;
+}
+
+#login-btn:hover {
+  background-color: rgb(9, 95, 9);
 }

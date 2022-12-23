@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Login from "./components/staffs/Login";
 import Register from "./components/staffs/Register";
 import logOut from "./redux/services/staffs/staff.service";
+import SplashScreen from './components/SplashScreen';
 import "./App.css";
 
 const App = () => {
@@ -17,6 +18,9 @@ const App = () => {
                 <Link className="nav-link" to="/register">
                     Register
                 </Link>
+                <Link className="nav-link" to="/splashscreen">
+                    Homepage
+                </Link>
                 <Link className="nav-link" to="/login">
                     Login
                 </Link>
@@ -27,9 +31,9 @@ const App = () => {
         </div>
         </nav><div className="container mt-3">
                 <Routes>
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/splashscreen" element={<SplashScreen />} />
                     <Route path='/register' element={<Register />}/>
-                    <Route path='/logout' element={<Login />} />
+                    <Route path='/login' element={<Login />} />
                 </Routes>
             </div>
         </>
