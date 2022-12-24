@@ -19,6 +19,15 @@ const store = configureStore({
         clubLogin: clubLoginSlice.reducer,
         clubRegister: clubRegisterSlice.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ['student/studentLogout/fulfilled',
+    'staff/staffLogout/fulfilled',
+'club/clubLogout/fulfilled'],
+      },
+    })
     
 }, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

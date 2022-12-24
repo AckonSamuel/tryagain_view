@@ -42,6 +42,8 @@ function Copyright(props) {
   );
 }
 
+let current_student = null;
+
 const theme = createTheme();
 
 const formSchema = Yup.object({
@@ -78,8 +80,13 @@ export default function StudentLogin() {
 
       const showdata = () => { 
         const data = getValues();
-        dispatch(studentLogin(data)).then(() => {
+        dispatch(studentLogin(data)).then((res) => {
+          console.log(res)
+          if(res.type === "student/studentLogin/fulfilled") {
+            current_student = 'student';
+            console.log(res)
             navigate("/feed");
+        }
           });
     };
   
@@ -210,3 +217,5 @@ export default function StudentLogin() {
     </ThemeProvider>
   );
 }
+
+export { current_student };

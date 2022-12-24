@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -32,6 +34,13 @@ import Groups2Icon from '@mui/icons-material/Groups2';
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { current_student } from './students/StudentLogin';
+import { current_staff } from './staffs/StaffLogin';
+import { current_club } from './clubs/ClubLogin';
+import { studentLogout } from '../redux/slices/students/logoutSlice';
+import { clubLogout } from '../redux/slices/clubs/logoutSlice';
+import { staffLogout } from '../redux/slices/staffs/logoutSlice';
+
 
 const drawerWidth = 240;
 
@@ -122,6 +131,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Appbar() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -155,6 +166,29 @@ export default function Appbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+   const handleLogout = () => {
+    if(current_club !== null) {
+      dispatch(clubLogout()).then((res) => {
+        console.log(res);
+          navigate('/');
+      })
+    }
+    if(current_student !== null) {
+      dispatch(studentLogout()).then((res) => {
+        console.log(res);
+          navigate('/');
+      })
+    }
+    if(current_staff !== null) {
+      dispatch(staffLogout()).then((res) => {
+        console.log(res);
+          navigate('/');
+      })
+    }
+    console.log(current_club);
+    console.log(current_staff);
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -174,6 +208,7 @@ export default function Appbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

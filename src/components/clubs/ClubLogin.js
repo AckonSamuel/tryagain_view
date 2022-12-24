@@ -40,7 +40,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-
+let current_club = null;
 const formSchema = Yup.object({
     password: Yup.string()
       .required("Password is required"),
@@ -76,7 +76,8 @@ export default function ClubLogin() {
       const showdata = () => { 
         const data = getValues();
         dispatch(clubLogin(data)).then(() => {
-            navigate("/error");
+          current_club = 'club';
+            navigate("/feed");
           });
     };
     
@@ -208,3 +209,5 @@ export default function ClubLogin() {
     </ThemeProvider>
   );
 }
+
+export { current_club };

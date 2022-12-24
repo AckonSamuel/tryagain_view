@@ -39,6 +39,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+let current_staff = null;
+
 const formSchema = Yup.object({
     password: Yup.string()
       .required("Password is required"),
@@ -71,10 +73,13 @@ export default function StaffLogin() {
 
       password = watch("password", "");
 
+
+
       const showdata = () => { 
         const data = getValues();
         dispatch(staffLogin(data)).then(() => {
-            navigate("/error");
+          current_staff = 'staff'
+            navigate("/feed");
           });
     };
     
@@ -206,3 +211,5 @@ export default function StaffLogin() {
     </ThemeProvider>
   );
 }
+
+export { current_staff };

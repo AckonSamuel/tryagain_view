@@ -46,7 +46,6 @@ const formSchema = Yup.object({
   phone_number: Yup.number()
   .required('Phone number is required')
   .min(10, 'Should contain at least 10 digits')
-  .max(15, 'Cannot exceed 15 digits')
 }).required();
 
 const theme = createTheme();

@@ -15,7 +15,7 @@ export const studentLogin = createAsyncThunk(
         if (res.data.accessToken) {
             localStorage.setItem('student', JSON.stringify(res.data))
         }
-        console.log(res.data)
+        console.log(res.data.accessToken)
         return res.data;
     })
 )
