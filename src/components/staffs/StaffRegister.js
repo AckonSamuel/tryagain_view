@@ -80,7 +80,7 @@ export default function StaffRegister() {
         const data = getValues();
         console.log(data);
         dispatch(staffSignUp(data)).then(() => {
-            navigate("/error");
+            navigate("/auth/staffs/login");
           });
     };
 

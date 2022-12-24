@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -22,6 +22,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
+import CheckIcon from '@mui/icons-material/Check';
+import LoginIcon from '@mui/icons-material/Login';
+import CircularProgress from '@mui/material/CircularProgress';
+import { green } from '@mui/material/colors';
 import { studentLogin } from '../../redux/slices/students/loginSlice';
 
 function Copyright(props) {
@@ -74,11 +79,10 @@ export default function StudentLogin() {
       const showdata = () => { 
         const data = getValues();
         dispatch(studentLogin(data)).then(() => {
-            navigate("/error");
+            navigate("/feed");
           });
     };
-    
-
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh'}}>

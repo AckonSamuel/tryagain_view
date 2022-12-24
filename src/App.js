@@ -9,6 +9,7 @@ import ClubLogin from './components/clubs/ClubLogin';
 import ClubRegister from './components/clubs/ClubRegister';
 import logOut from "./redux/services/staffs/staff.service";
 import SplashScreen from './components/SplashScreen';
+import Homepage from "./components/Homepage";
 import "./App.css";
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path='/auth/clubs/register' element={<ClubRegister />} />
                     <Route path='/auth/staffs/register' element={<StaffRegister />} />
                     <Route path='/auth/students/register' element={<StudentRegister />} />
+                    <Route path='/feed' element={<Homepage />} />
                 </Routes>
             </div>
         </>

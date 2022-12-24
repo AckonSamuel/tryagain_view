@@ -82,7 +82,7 @@ export default function ClubRegister() {
         const data = getValues();
         console.log(data);
         dispatch(clubSignUp(data)).then(() => {
-            navigate("/error");
+            navigate("/auth/clubs/login");
           });
     };
 
@@ -178,6 +178,7 @@ export default function ClubRegister() {
                   <MenuItem value='Faculty'>Faculty</MenuItem>
                   <MenuItem value='Department'>Department</MenuItem>
                   <MenuItem value='Entertainment'>Entertainment</MenuItem>
+                  <MenuItem value='Sports'>Sports</MenuItem>
                   <MenuItem value='Other'>Other</MenuItem>
                 </Select>
                 </FormControl>
