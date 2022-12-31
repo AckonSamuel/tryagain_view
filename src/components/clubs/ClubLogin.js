@@ -80,7 +80,6 @@ export default function ClubLogin() {
             navigate("/feed");
           });
     };
-    
 
   return (
     <ThemeProvider theme={theme}>

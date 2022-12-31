@@ -1,10 +1,20 @@
 import React from 'react';
 
+const styles = {
+    paperContainer: {
+        height: 123,
+        backgroundImage: `url(${'https://user-images.githubusercontent.com/92922987/210137290-ad0139f1-0dc3-4a43-90cd-06435c9f4254.jpg'})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain'
+    }
+};
+
 export default function ClubDetails () {
     
     return( 
         <>
-        <div className='banner-image'>Hello  viewer!</div>
+        <div className='banner-image' style={styles.paperContainer}>
+        </div>
         <div className='about-club'>
             <p className='about-text'></p>
             <div className='about-icons'>
