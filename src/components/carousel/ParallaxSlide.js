@@ -42,22 +42,23 @@ const ParallaxSlide = ({ transition, children, renderElements, ...props }) => {
                 onChangeIndex={onChangeIndex}
                 onSwitching={i => {
                     setFineIndex(i);
-                }}>
+                }}
+            >
                 {views}
             </SwipeableViews>
             {!isSingleView && renderElements({ index, onChangeIndex })}
         </>
     );
-}
+};
 
 ParallaxSlide.propTypes = {
+    transition: PropTypes.string,
     children: PropTypes.func.isRequired,
-    transitions: PropTypes.string,
     renderElements: PropTypes.func,
 };
 ParallaxSlide.defaultProps = {
     transition: '0.8s',
-    renderElements: () => {},
+    renderElements: () => { },
 };
 
 export default ParallaxSlide;

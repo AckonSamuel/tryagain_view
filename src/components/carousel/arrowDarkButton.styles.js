@@ -1,4 +1,6 @@
-export default ({ breakpoints }) => ({
+import { makeStyles } from "@mui/styles";
+
+const arrowDarkButtonStyles = makeStyles(({ breakpoints }) => ({
     root: {
       borderRadius: '50%',
       border: '1px solid',
@@ -28,5 +30,6 @@ export default ({ breakpoints }) => ({
       },
     },
     label: {},
-  });
-  
+  }));
+
+export default arrowDarkButtonStyles;
