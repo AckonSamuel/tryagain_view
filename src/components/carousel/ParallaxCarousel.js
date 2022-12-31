@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import Paper from '@mui/material/Paper';
 import ParallaxSlide from './ParallaxSlide';
 import DotIndicator from './DotIndicator';
 import arrowDarkButtonStyles from './arrowDarkButton.styles';
@@ -40,9 +41,10 @@ const useStyles = makeStyles(({ palette, breakpoints, spacing }) => ({
   root: {
     // a must if you want to set arrows, indicator as absolute
     position: 'relative',
-    width: '80%',
+    width: '100%',
     height: '30%',
     margin: 'auto',
+    padding: '6em',
     },
   slide: {
     perspective: 1000, // create perspective
@@ -173,7 +175,6 @@ const ParallaxCarousel = () => {
       >
         <KeyboardArrowRight />
       </Button>
-      <div className={classes.indicatorContainer}></div>
       {/* <div className={classes.indicatorContainer}>
         {data.map(({ id }, i) => (
           <DotIndicator
@@ -204,15 +205,17 @@ const ParallaxCarousel = () => {
           {subtitle}
         </Typography>
         <div className={classes.imageContainer}>
-          <img className={classes.image} src={image} alt={'slide'} />
+          <img className={classes.image} src={image} alt={'slide'} loading='lazy' />
         </div>
       </div>
     ));
   return (
     <div className={classes.root}>
+      <Paper elevation={7} >
       <ParallaxSlide renderElements={renderElements}>
         {renderChildren}
       </ParallaxSlide>
+      </Paper>
     </div>
   );
 };

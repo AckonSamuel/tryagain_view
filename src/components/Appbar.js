@@ -208,7 +208,7 @@ export default function Appbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout} title={'logout'}>Logout</MenuItem>
     </Menu>
   );
 
