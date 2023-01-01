@@ -1,26 +1,20 @@
-import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
-import { PostContext } from './PostGateway';
+import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 
-const DisplayPost = () => {
-    const {post, setPost} = useContext(PostContext);
+const ShowPostData = () => {
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/posts')
-        .then((response) => {
-            setPost(response.data)
-        })
-    }, [setPost])
+    const posts = useSelector((state) => state.postFetch.post.data, shallowEqual);
+    console.log(posts)
 
     return (
         <div className='container border border-info'>
         <div className="row">
-            {
-                Array.from(post).map((data) => {
+            { posts &&
+                Array.from(posts).map((data) => {
                     return (
                         <div className="col-3"  key = {data.id}>
                             <div className="card">
-                                <img className="card-img-top" src={data.image} alt="url for foto" />
+                                <img className="card-img-top" src={data.attributes.image_url} alt="url for foto" />
                                 <div className="card-body">
                                   <p className="card-text">{data.caption}</p>
                                 </div>
@@ -34,4 +28,4 @@ const DisplayPost = () => {
   )
 }
 
-export default DisplayPost;
+export default ShowPostData;

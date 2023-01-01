@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import {useForm} from 'react-hook-form';
-import { PostContext } from './PostGateway';
+import { useDispatch } from 'react-redux';
+import { postUpload } from '../../redux/slices/posts/postUpload';
+
+
 
 const AddPost = () => {
+    const dispatch = useDispatch();
     const { register, handleSubmit, reset } = useForm();
-    const {post, setPost} = useContext(PostContext);
 
     const sendDataToApi = (data) => {
         const formData = new FormData();
@@ -13,13 +15,11 @@ const AddPost = () => {
         formData.append('post[caption]', post.caption)
         formData.append('post[image]', post.image)
         console.log(formData)
-        axios.post('http://localhost:3000/posts', formData, {
-            headers: {'Content-Type' : 'multipart/form-data'},
-        })
+        dispatch(postUpload(formData))
         .then((response) => {
-            if(response.data.status === 'created') {
-                setPost(response.data.post)
+            if(response.type === 'post/postUpload/fulfilled' ) {
                 console.log(response)
+                window.location.reload();
             }
         })
         reset()

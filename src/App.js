@@ -11,7 +11,7 @@ import ClubDetails from "./components/clubs/ClubDetails";
 import logOut from "./redux/services/staffs/staff.service";
 import SplashScreen from './components/SplashScreen';
 import Homepage from "./components/Homepage";
-import PostGateway from "./components/PostGateway";
+import PostGateway from "./components/posts/PostGateway";
 import "./App.css";
 
 const App = () => {
