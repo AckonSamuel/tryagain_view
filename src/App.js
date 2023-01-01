@@ -11,6 +11,7 @@ import ClubDetails from "./components/clubs/ClubDetails";
 import logOut from "./redux/services/staffs/staff.service";
 import SplashScreen from './components/SplashScreen';
 import Homepage from "./components/Homepage";
+import PostGateway from "./components/PostGateway";
 import "./App.css";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
                     <Route path='/auth/students/register' element={<StudentRegister />} />
                     <Route path='/feed' element={<Homepage />} />
                     <Route path='/clubdetails' element={<ClubDetails />} />
+                    <Route path='/post' element={<PostGateway />} />
                 </Routes>
             </div>
         </>
