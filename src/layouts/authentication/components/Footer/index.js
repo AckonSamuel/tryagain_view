@@ -28,8 +28,8 @@ function Footer({ light }) {
           alignItems="center"
           px={1.5}
           sx={{
-            marginRight: 'auto',
-            gap: 4
+            marginRight: "auto",
+            gap: 4,
           }}
         >
           <MDBox

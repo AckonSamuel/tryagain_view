@@ -23,13 +23,13 @@ import MDlogo from "components/MDlogo";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import PasswordInput from "components/MDInput/PasswordInput";
 
-
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-  const bgImage = "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
+  const bgImage =
+    "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
 
   return (
     <BasicLayout image={bgImage}>
@@ -50,17 +50,17 @@ function Basic() {
             Sign in
           </MDTypography>
         </MDBox>
-        <MDBox 
-        // pt={4} pb={3} px={3}
-        variant="gradient"
-        // bgColor="success"
-        borderRadius="lg"
-        coloredShadow="info"
-        mx={2}
-        mt={-3}
-        p={2}
-        mb={1}
-        textAlign="center"
+        <MDBox
+          // pt={4} pb={3} px={3}
+          variant="gradient"
+          // bgColor="success"
+          borderRadius="lg"
+          coloredShadow="info"
+          mx={2}
+          mt={-3}
+          p={2}
+          mb={1}
+          textAlign="center"
         >
           <MDBox component="form" role="form">
             <MDBox mb={2}>

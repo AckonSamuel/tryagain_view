@@ -41,10 +41,15 @@ function BasicLayout({ image, children }) {
         }}
       />
       <MDBox px={1} width="100%" height="100vh" mx="auto">
-        <Grid container spacing={1}  alignItems="center" height="100%"
-        sx={{
-          marginLeft: '68%'
-        }}>
+        <Grid
+          container
+          spacing={1}
+          alignItems="center"
+          height="100%"
+          sx={{
+            marginLeft: "68%",
+          }}
+        >
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             {children}
           </Grid>
