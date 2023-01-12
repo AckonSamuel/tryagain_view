@@ -3,8 +3,8 @@
 * Material Dashboard 2 PRO React - v1.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Product Page: #/product/soft-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (#)
 
 Coded by www.creative-tim.com
 

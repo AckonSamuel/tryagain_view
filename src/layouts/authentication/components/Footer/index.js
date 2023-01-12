@@ -1,4 +1,5 @@
 // prop-types is a library for typechecking of props
+
 import PropTypes from "prop-types";
 
 // @mui material components
@@ -23,9 +24,13 @@ function Footer({ light }) {
           width="100%"
           display="flex"
           flexDirection={{ xs: "column", lg: "row" }}
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="center"
           px={1.5}
+          sx={{
+            marginRight: 'auto',
+            gap: 4
+          }}
         >
           <MDBox
             display="flex"
@@ -42,12 +47,11 @@ function Footer({ light }) {
               </Icon>
             </MDBox>
             by
-            <Link href="https://www.creative-tim.com/" target="_blank">
+            <Link href="#/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                &nbsp;Creative Tim&nbsp;
+                &nbsp;KNUST SRC&nbsp;
               </MDTypography>
             </Link>
-            for a better web.
           </MDBox>
           <MDBox
             component="ul"
@@ -67,18 +71,18 @@ function Footer({ light }) {
             })}
           >
             <MDBox component="li" pr={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/" target="_blank">
+              <Link href="#/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  Creative Tim
+                  KNUST SRC
                 </MDTypography>
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/presentation" target="_blank">
+              <Link href="#/presentation" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -88,19 +92,8 @@ function Footer({ light }) {
                 </MDTypography>
               </Link>
             </MDBox>
-            <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/blog" target="_blank">
-                <MDTypography
-                  variant="button"
-                  fontWeight="regular"
-                  color={light ? "white" : "dark"}
-                >
-                  Blog
-                </MDTypography>
-              </Link>
-            </MDBox>
             <MDBox component="li" pl={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/license" target="_blank">
+              <Link href="#/license" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"

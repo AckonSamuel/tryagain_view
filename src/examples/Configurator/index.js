@@ -273,7 +273,7 @@ function Configurator() {
         <MDBox mt={3} mb={2}>
           <MDButton
             component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
+            href="#/learning-lab/react/quick-start/material-dashboard/"
             target="_blank"
             rel="noreferrer"
             color={darkMode ? "light" : "dark"}
@@ -314,7 +314,7 @@ function Configurator() {
             </MDBox>
             <MDButton
               component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard-react"
+              href="https://www.facebook.com/sharer/sharer.php?u=#/product/material-dashboard-react"
               target="_blank"
               rel="noreferrer"
               color="dark"

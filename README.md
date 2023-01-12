@@ -1,4 +1,4 @@
-# [Material Dashboard 2 React](http://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://www.creative-tim.com/product/material-dashboard-react&text=Check%20Material%20Dashboard%202%20react%20made%20by%20@CreativeTim%20#webdesign%20#dashboard%20#materialdesign%20#react%20https://www.creative-tim.com/product/material-dashboard-react)
+# [Material Dashboard 2 React](http://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=#/product/material-dashboard-react&text=Check%20Material%20Dashboard%202%20react%20made%20by%20@CreativeTim%20#webdesign%20#dashboard%20#materialdesign%20#react%20#/product/material-dashboard-react)
 
 ![version](https://img.shields.io/badge/version-2.1.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/material-dashboard-react.svg)](https://github.com/creativetimofficial/material-dashboard-react/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-dashboard-react.svg)](https://github.com/creativetimofficial/material-dashboard-react/issues?q=is%3Aissue+is%3Aclosed)
 
@@ -12,13 +12,13 @@ Material Dashboard 2 React is built with over 70 frontend individual elements, l
 This free MUI & React Dashboard is coming with prebuilt design blocks, so the development process is seamless,
 switching from our pages to the real website is very easy to be done.
 
-View [all components here](https://www.creative-tim.com/learning-lab/react/alerts/material-dashboard/).
+View [all components here](#/learning-lab/react/alerts/material-dashboard/).
 
 **Documentation built by Developers**
 
 Each element is well presented in very complex documentation.
 
-You can read more about the [documentation here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/).
+You can read more about the [documentation here](#/learning-lab/react/overview/material-dashboard/).
 
 **Example Pages**
 
@@ -29,7 +29,7 @@ View [example pages here](https://demos.creative-tim.com/material-dashboard-reac
 **HELPFUL LINKS**
 
 - View [Github Repository](https://github.com/creativetimofficial/material-dashboard-react)
-- Check [FAQ Page](https://www.creative-tim.com/faq)
+- Check [FAQ Page](#/faq)
 
 #### Special thanks
 
@@ -57,7 +57,7 @@ Let us know your thoughts below. And good luck with development!
 
 ## Versions
 
-[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react-logo.png?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr)
+[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react-logo.png?raw=true" width="60" height="60" />](#/product/material-dashboard-react?ref=readme-mdr)
 
 | React |
 | ----- |
@@ -78,7 +78,7 @@ Let us know your thoughts below. And good luck with development!
 
 Quick start options:
 
-- Download from [Creative Tim](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
+- Download from [Creative Tim](#/product/material-dashboard-react?ref=readme-mdr).
 
 ## Terminal Commands
 
@@ -87,7 +87,7 @@ Quick start options:
 
 ## Documentation
 
-The documentation for the Material Dashboard is hosted at our [website](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/?ref=readme-mdr).
+The documentation for the Material Dashboard is hosted at our [website](#/learning-lab/react/overview/material-dashboard/?ref=readme-mdr).
 
 ### What's included
 
@@ -171,38 +171,38 @@ At present, we officially aim to support the last two versions of the following 
 ## Resources
 
 - [Live Preview](https://demos.creative-tim.com/material-dashboard-react/#/dashboard?ref=readme-mdr)
-- [Download Page](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr)
-- Documentation is [here](https://www.creative-tim.com/learning-lab/react/overview/material-dashboard/?ref=readme-mdr)
-- [License Agreement](https://www.creative-tim.com/license?ref=readme-mdr)
-- [Support](https://www.creative-tim.com/contact-us?ref=readme-mdr)
+- [Download Page](#/product/material-dashboard-react?ref=readme-mdr)
+- Documentation is [here](#/learning-lab/react/overview/material-dashboard/?ref=readme-mdr)
+- [License Agreement](#/license?ref=readme-mdr)
+- [Support](#/contact-us?ref=readme-mdr)
 - Issues: [Github Issues Page](https://github.com/creativetimofficial/material-dashboard-react/issues)
 
 ## Reporting Issues
 
 We use GitHub Issues as the official bug tracker for the Material Dashboard React. Here are some advices for our users that want to report an issue:
 
-1. Make sure that you are using the latest version of the Material Dashboard React. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
+1. Make sure that you are using the latest version of the Material Dashboard React. Check the CHANGELOG from your dashboard on our [website](#/product/material-dashboard-react?ref=readme-mdr).
 2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
 3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
 ## Technical Support or Questions
 
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us?ref=readme-mdr) instead of opening an issue.
+If you have questions or need help integrating the product please [contact us](#/contact-us?ref=readme-mdr) instead of opening an issue.
 
 ## Licensing
 
-- Copyright 2021 [Creative Tim](https://www.creative-tim.com?ref=readme-mdr)
-- Creative Tim [license](https://www.creative-tim.com/license?ref=readme-mdr)
+- Copyright 2021 [Creative Tim](#?ref=readme-mdr)
+- Creative Tim [license](#/license?ref=readme-mdr)
 
 ## Useful Links
 
-- [More products](https://www.creative-tim.com/templates?ref=readme-mdr) from Creative Tim
+- [More products](#/templates?ref=readme-mdr) from Creative Tim
 
 - [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
 
-- [Freebies](https://www.creative-tim.com/bootstrap-themes/free?ref=readme-mdr) from Creative Tim
+- [Freebies](#/bootstrap-themes/free?ref=readme-mdr) from Creative Tim
 
-- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=readme-mdr) (earn money)
+- [Affiliate Program](#/affiliates/new?ref=readme-mdr) (earn money)
 
 ##### Social Media
 
