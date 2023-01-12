@@ -4,14 +4,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // react-redux component
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // @mui material components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 
 // react-hook-forms
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+// yup components
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -30,6 +33,15 @@ function Basic() {
 
   const bgImage =
     "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
+
+    let password;
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      watch,
+      getValues
+    } = useForm();
 
   return (
     <BasicLayout image={bgImage}>
@@ -64,10 +76,16 @@ function Basic() {
         >
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput 
+              type="email" 
+              {...register("email", {required: true, pattern: /@st.knust.edu.gh/i})}
+              fullWidth />
             </MDBox>
             <MDBox mb={2}>
-              <PasswordInput type="password" label="Password" fullWidth />
+              <PasswordInput 
+              type="password"
+              {...register("password", {required: true})} 
+              fullWidth />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
