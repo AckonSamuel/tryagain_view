@@ -21,13 +21,30 @@ import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import MDlogo from "components/MDlogo";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
-import PasswordInput from "components/MDInput/PasswordInput";
+
+// Redux functions
+import { studentLogin } from "redux/slices/students/loginSlice";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  const dispatch = useDispatch();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
+  };
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -35,6 +52,7 @@ function Basic() {
     "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
 
   let password;
+  let hitit = false;
   const {
     register,
     handleSubmit,
@@ -42,6 +60,25 @@ function Basic() {
     watch,
     getValues,
   } = useForm();
+
+  password = watch("password", "");
+
+  const data = getValues();
+
+ dispatch(studentLogin(data)).then((res) => {
+    console.log(data);
+    console.log(res)
+    if (res.type === "student/studentLogin/fulfilled") {
+      current_student = "student";
+    }
+    if (res.type === "student/studentLogout/rejected") {
+
+    }
+  })
+
+  const showdata = () => {
+    console.log(data);
+  }
 
   return (
     <BasicLayout image={bgImage}>
@@ -58,7 +95,7 @@ function Basic() {
           textAlign="center"
         >
           <MDlogo />
-          <MDTypography variant="h4" fontWeight="medium" color="black" mt={0.4}>
+          <MDTypography variant="h4" fontWeight="medium" color="dark" mt={0.4}>
             Sign in
           </MDTypography>
         </MDBox>
@@ -78,16 +115,35 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput
                 type="email"
+                label="Email"
                 {...register("email", { required: true, pattern: /@st.knust.edu.gh/i })}
                 fullWidth
               />
             </MDBox>
             <MDBox mb={2}>
-              <PasswordInput
-                type="password"
-                {...register("password", { required: true })}
-                fullWidth
-              />
+              <FormControl sx={{ width: "100%" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  autoComplete="current-password"
+                  fullWidth
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                  {...register("password", { required: true })}
+                />
+              </FormControl>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -102,7 +158,7 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="success" fullWidth>
+              <MDButton variant="gradient" color="success" type="submit" fullWidth>
                 sign in
               </MDButton>
             </MDBox>
