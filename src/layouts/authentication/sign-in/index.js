@@ -34,14 +34,14 @@ function Basic() {
   const bgImage =
     "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
 
-    let password;
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      watch,
-      getValues
-    } = useForm();
+  let password;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    getValues,
+  } = useForm();
 
   return (
     <BasicLayout image={bgImage}>
@@ -76,16 +76,18 @@ function Basic() {
         >
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput 
-              type="email" 
-              {...register("email", {required: true, pattern: /@st.knust.edu.gh/i})}
-              fullWidth />
+              <MDInput
+                type="email"
+                {...register("email", { required: true, pattern: /@st.knust.edu.gh/i })}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <PasswordInput 
-              type="password"
-              {...register("password", {required: true})} 
-              fullWidth />
+              <PasswordInput
+                type="password"
+                {...register("password", { required: true })}
+                fullWidth
+              />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
