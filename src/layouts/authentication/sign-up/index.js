@@ -8,8 +8,8 @@ import Checkbox from "@mui/material/Checkbox";
 
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import * as Yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -57,24 +57,22 @@ function Cover() {
     e.preventDefault();
   };
 
-  let password;
+  // let password;
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
+    // formState: { errors },
+    // watch,
     getValues,
   } = useForm();
 
-  password = watch("password", "");
+  // password = watch("password", "");
 
   const showdata = () => {
     const data = getValues();
-    console.log(data);
     dispatch(clubSignUp(data)).then((res) => {
       if (res) {
         navigate("/auth/clubs/login");
-        console.log(res);
       }
     });
   };

@@ -9,7 +9,6 @@ const initialState = {
 
 export const postFetch = createAsyncThunk("post/postFetch", async () => {
   const res = await axios.get("http://localhost:3000/posts");
-  console.log(res.data);
   return res;
 });
 
@@ -24,11 +23,9 @@ const postFetchSlice = createSlice({
       state.error = "";
     });
     builder.addCase(postFetch.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.post = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.post);
     });
     builder.addCase(postFetch.rejected, (state, action) => {
       state.error = action.error.message;

@@ -16,7 +16,7 @@ export const studentLogout = createAsyncThunk("student/studentLogout", async () 
   if (res.data.status === 200) {
     localStorage.removeItem("student");
   }
-  console.log(res);
+
   return res;
 });
 
@@ -31,11 +31,9 @@ const studentLogoutSlice = createSlice({
       state.error = "";
     });
     builder.addCase(studentLogout.fulfilled, (state, action) => {
-      console.log(action.payload.data);
       state.student = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.student);
     });
     builder.addCase(studentLogout.rejected, (state, action) => {
       state.error = action.error.message;

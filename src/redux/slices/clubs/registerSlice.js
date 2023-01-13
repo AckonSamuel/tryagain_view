@@ -13,7 +13,6 @@ export const clubSignUp = createAsyncThunk("club/clubSignUP", async (club) => {
   if (res.data.accessToken) {
     localStorage.setItem("club", JSON.stringify(res.data));
   }
-  console.log(res.data);
   return res.data;
 });
 
@@ -28,11 +27,9 @@ const clubRegisterSlice = createSlice({
       state.error = "";
     });
     builder.addCase(clubSignUp.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.club = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.club);
     });
     builder.addCase(clubSignUp.rejected, (state, action) => {
       state.error = action.error.message;

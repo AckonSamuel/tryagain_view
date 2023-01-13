@@ -18,7 +18,7 @@
 //         if (res.status.code === 200) {
 //           localStorage.removeItem("staff");
 //         }
-//         console.log(res);
+//
 //         return res;
 //       })
 // );
@@ -34,7 +34,7 @@
 //       state.error = "";
 //     });
 //     builder.addCase(staffLogout.fulfilled, (state, action) => {
-//       console.log(action.payload);
+//
 //       state.staff = action.payload.data;
 //       state.loading = false;
 //       state.error = "";

@@ -16,7 +16,7 @@ export const clubLogout = createAsyncThunk("club/clubLogout", async () => {
   if (res.data.status === 200) {
     localStorage.removeItem("club");
   }
-  console.log(res);
+
   return res;
 });
 
@@ -31,11 +31,9 @@ const clubLogoutSlice = createSlice({
       state.error = "";
     });
     builder.addCase(clubLogout.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.club = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.club);
     });
     builder.addCase(clubLogout.rejected, (state, action) => {
       state.error = action.error.message;

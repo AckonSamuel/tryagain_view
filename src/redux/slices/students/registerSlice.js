@@ -13,7 +13,6 @@ export const studentSignUp = createAsyncThunk("student/studentSignUP", async (st
   if (res.data.accessToken) {
     localStorage.setItem("student", JSON.stringify(res.data));
   }
-  console.log(res.data);
   return res.data;
 });
 
@@ -28,11 +27,9 @@ const studentRegisterSlice = createSlice({
       state.error = "";
     });
     builder.addCase(studentSignUp.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.student = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.student);
     });
     builder.addCase(studentSignUp.rejected, (state, action) => {
       state.error = action.error.message;

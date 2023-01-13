@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // react-redux component
 import { useDispatch } from "react-redux";
@@ -35,9 +35,12 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Redux functions
 import { clubLogin } from "redux/slices/clubs/loginSlice";
 
+// export let currentStudent = "";
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -51,29 +54,24 @@ function Basic() {
   const bgImage =
     "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
 
-  let password;
-  const hitit = false;
+  // let password;
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
+    // formState: { errors },
+    // watch,
     getValues,
   } = useForm();
-
-  password = watch("password", "");
 
   const showdata = () => {
     const data = getValues();
 
     dispatch(clubLogin(data)).then((res) => {
-      console.log(data);
-      console.log(res);
       if (res.type === "student/studentLogin/fulfilled") {
-        current_student = "student";
+        navigate("/dashboard");
       }
-      if (res.type === "student/studentLogout/rejected") {
-      }
+      // if (res.type === "student/studentLogout/rejected") {
+      // }
     });
   };
 

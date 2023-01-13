@@ -11,7 +11,7 @@ export const postUpload = createAsyncThunk("post/postUpload", async (post) => {
   const res = await axios.post("http://localhost:3000/posts", post, {
     headers: { "Content-Type": "multipart/form-data" },
   });
-  console.log(res);
+
   return res;
 });
 
@@ -26,11 +26,9 @@ const postUploadSlice = createSlice({
       state.error = "";
     });
     builder.addCase(postUpload.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.post = action.payload.data;
       state.loading = false;
       state.error = "";
-      console.log(state.post);
     });
     builder.addCase(postUpload.rejected, (state, action) => {
       state.error = action.error.message;

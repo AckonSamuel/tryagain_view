@@ -30,7 +30,7 @@
 //       state.error = "";
 //     });
 //     builder.addCase(staffLogin.fulfilled, (state, action) => {
-//       console.log(action.payload);
+//
 //       state.staff = action.payload.data;
 //       state.loading = false;
 //       state.error = "";
