@@ -174,9 +174,7 @@ export default function App() {
         </>
       )}
       {layout === "vr" && <Configurator />}
-      <Routes>
-        {getRoutes(routes)}
-      </Routes>
+      <Routes>{getRoutes(routes)}</Routes>
     </ThemeProvider>
   );
 }

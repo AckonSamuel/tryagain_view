@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -78,7 +78,6 @@ function Cover() {
       }
     });
   };
-
 
   return (
     <CoverLayout image={bgImage}>
@@ -148,29 +147,29 @@ function Cover() {
             </MDBox>
             <MDBox mb={2}>
               <FormControl sx={{ width: "100%" }} variant="standard">
-              <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-          <Input
-            id="out-basic"
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Confirm Password"
-            {...register('password_confirmation')}
-            required
-          />
+                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                <Input
+                  id="out-basic"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Confirm Password"
+                  {...register("password_confirmation")}
+                  required
+                />
               </FormControl>
             </MDBox>
-           <MDBox mb={2}>
+            <MDBox mb={2}>
               <MDInput
                 type="integer"
                 label="Telephone number"
@@ -180,29 +179,21 @@ function Cover() {
               />
             </MDBox>
             <MDBox mb={2}>
-            <FormControl fullWidth variant="standard">
-                  <InputLabel htmlFor='group'>
-                    Group
-                  </InputLabel>
-                  <Select
-                {...register('group')}
-                  required
-                  id="group"
-                  label="group"
-                  variant="standard"
-                >
-                  <MenuItem value='Religious'>Religious</MenuItem>
-                  <MenuItem value='Alumni'>Alumni</MenuItem>
-                  <MenuItem value='Ethnic'>Ethnic</MenuItem>
-                  <MenuItem value='Professional'>Professional</MenuItem>
-                  <MenuItem value='College'>College</MenuItem>
-                  <MenuItem value='Faculty'>Faculty</MenuItem>
-                  <MenuItem value='Department'>Department</MenuItem>
-                  <MenuItem value='Entertainment'>Entertainment</MenuItem>
-                  <MenuItem value='Sports'>Sports</MenuItem>
-                  <MenuItem value='Other'>Other</MenuItem>
+              <FormControl fullWidth variant="standard">
+                <InputLabel htmlFor="group">Group</InputLabel>
+                <Select {...register("group")} required id="group" label="group" variant="standard">
+                  <MenuItem value="Religious">Religious</MenuItem>
+                  <MenuItem value="Alumni">Alumni</MenuItem>
+                  <MenuItem value="Ethnic">Ethnic</MenuItem>
+                  <MenuItem value="Professional">Professional</MenuItem>
+                  <MenuItem value="College">College</MenuItem>
+                  <MenuItem value="Faculty">Faculty</MenuItem>
+                  <MenuItem value="Department">Department</MenuItem>
+                  <MenuItem value="Entertainment">Entertainment</MenuItem>
+                  <MenuItem value="Sports">Sports</MenuItem>
+                  <MenuItem value="Other">Other</MenuItem>
                 </Select>
-                </FormControl>
+              </FormControl>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
