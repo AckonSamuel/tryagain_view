@@ -67,7 +67,7 @@ function Basic() {
     const data = getValues();
 
     dispatch(clubLogin(data)).then((res) => {
-      if (res.type === "student/clubLogin/fulfilled") {
+      if (res.type === "club/clubLogin/fulfilled") {
         navigate("/dashboard");
       }
       // if (res.type === "student/studentLogout/rejected") {
