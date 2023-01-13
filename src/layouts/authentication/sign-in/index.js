@@ -52,7 +52,7 @@ function Basic() {
     "https://user-images.githubusercontent.com/92922987/209251235-962d91f6-12eb-4341-9e71-eaf504965806.jpg";
 
   let password;
-  let hitit = false;
+  const hitit = false;
   const {
     register,
     handleSubmit,
@@ -63,22 +63,19 @@ function Basic() {
 
   password = watch("password", "");
 
-  const data = getValues();
-
- dispatch(studentLogin(data)).then((res) => {
-    console.log(data);
-    console.log(res)
-    if (res.type === "student/studentLogin/fulfilled") {
-      current_student = "student";
-    }
-    if (res.type === "student/studentLogout/rejected") {
-
-    }
-  })
-
   const showdata = () => {
-    console.log(data);
-  }
+    const data = getValues();
+
+    dispatch(studentLogin(data)).then((res) => {
+      console.log(data);
+      console.log(res);
+      if (res.type === "student/studentLogin/fulfilled") {
+        current_student = "student";
+      }
+      if (res.type === "student/studentLogout/rejected") {
+      }
+    });
+  };
 
   return (
     <BasicLayout image={bgImage}>
@@ -111,7 +108,7 @@ function Basic() {
           mb={1}
           textAlign="center"
         >
-          <MDBox component="form" role="form">
+          <MDBox component="form" role="form" onSubmit={handleSubmit(showdata)}>
             <MDBox mb={2}>
               <MDInput
                 type="email"
