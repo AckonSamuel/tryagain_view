@@ -33,7 +33,7 @@ import InputLabel from "@mui/material/InputLabel";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Redux functions
-import { studentLogin } from "redux/slices/students/loginSlice";
+import { clubLogin } from "redux/slices/clubs/loginSlice";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -66,7 +66,7 @@ function Basic() {
   const showdata = () => {
     const data = getValues();
 
-    dispatch(studentLogin(data)).then((res) => {
+    dispatch(clubLogin(data)).then((res) => {
       console.log(data);
       console.log(res);
       if (res.type === "student/studentLogin/fulfilled") {
@@ -113,7 +113,10 @@ function Basic() {
               <MDInput
                 type="email"
                 label="Email"
-                {...register("email", { required: true, pattern: /@st.knust.edu.gh/i })}
+                {...register("email", {
+                  required: true,
+                  // pattern: /@st.knust.edu.gh/i
+                })}
                 fullWidth
               />
             </MDBox>

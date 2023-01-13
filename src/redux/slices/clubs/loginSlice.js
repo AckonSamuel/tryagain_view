@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "redux/common";
 
 const initialState = {
   club: {},
@@ -8,7 +9,7 @@ const initialState = {
 };
 
 export const clubLogin = createAsyncThunk("club/clubLogin", async (club) => {
-  const res = await axios.post("http://localhost:3000/auth/clubs/login", { club });
+  const res = await axios.post(`${BASE_URL}/auth/clubs/login`, { club });
   if (res.data.accessToken) {
     localStorage.setItem("club", JSON.stringify(res.data));
   }

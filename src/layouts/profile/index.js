@@ -180,7 +180,6 @@ function Overview() {
           </Grid>
         </MDBox>
       </Header>
-      <Footer />
     </DashboardLayout>
   );
 }

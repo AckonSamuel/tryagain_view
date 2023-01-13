@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "redux/common";
 import clubAuthHeader from "../../services/clubs/auth-header";
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
 };
 
 export const clubLogout = createAsyncThunk("club/clubLogout", async () => {
-  const res = await axios.delete("http://localhost:3000/auth/clubs/logout", {
+  const res = await axios.delete(`${BASE_URL}/auth/clubs/logout`, {
     headers: clubAuthHeader(),
   });
   if (res.data.status === 200) {
