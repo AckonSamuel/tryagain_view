@@ -11,9 +11,8 @@ const logOut = async () => {
     localStorage.removeItem("staff");
     return response;
   } catch (error) {
-    console.log(error);
+    return error;
   }
-  return null;
 };
 
 export default logOut;

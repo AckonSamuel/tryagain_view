@@ -12,95 +12,86 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import MDButton from "components/MDButton";
 
 export default function UpdateClubForm() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { 
-    register, 
-    handleSubmit, 
-    getValues 
-} = useForm();
+  const { register, handleSubmit, getValues } = useForm();
 
-const onSubmit = () => {
-  const data = getValues();
-  const getClub = JSON.parse(localStorage.getItem("club"));
-  console.log(getClub.data.id);
-   if (getClub && getClub.data.id ) {
-    dispatch(clubUpdate(data)).
-    then((res) => {
-        if (res.type === 'club/clubUpdate/fulfilled')
-        {
-            navigate("/clubs");
+  const onSubmit = () => {
+    const data = getValues();
+    const getClub = JSON.parse(localStorage.getItem("club"));
+    if (getClub && getClub.data.id) {
+      dispatch(clubUpdate(data)).then((res) => {
+        if (res.type === "club/clubUpdate/fulfilled") {
+          navigate("/clubs");
         }
-    })
-   }
-};
-
+      });
+    }
+  };
 
   return (
     <DashboardLayout>
-    <Paper elevation={9} sx={{
-        padding: '2em'
-    }}>
-      <Typography variant="h6">Update club info</Typography>
-      <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="history"
-              multiline
-              label="History"
-              fullWidth
-              autoComplete="given-name"
-              variant="standard"
-              {...register("history")}
-            />
+      <Paper
+        elevation={9}
+        sx={{
+          padding: "2em",
+        }}
+      >
+        <Typography variant="h6">Update club info</Typography>
+        <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                id="history"
+                multiline
+                label="History"
+                fullWidth
+                autoComplete="given-name"
+                variant="standard"
+                {...register("history")}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                id="description"
+                {...register("description")}
+                label="desciption"
+                fullWidth
+                autoComplete="family-name"
+                variant="standard"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                id="meeting-time"
+                {...register("meeting_time")}
+                label="Meeting times"
+                fullWidth
+                autoComplete="meeting-time"
+                variant="standard"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="meeting-location"
+                label="meeting_location"
+                {...register("meeting_location")}
+                fullWidth
+                autoComplete="Meeting location"
+                variant="standard"
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="description"
-              {...register("description")}
-              label="desciption"
-              fullWidth
-              autoComplete="family-name"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="meeting-time"
-              {...register("meeting_time")}
-              label="Meeting times"
-              fullWidth
-              autoComplete="meeting-time"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="meeting-location"
-              label="meeting_location"
-              {...register("meeting_location")}
-              fullWidth
-              autoComplete="Meeting location"
-              variant="standard"
-            />
-          </Grid>
-        </Grid>
-        <MDBox mt={4} mb={1}>
-              <MDButton 
-              variant="gradient" 
-              color="success" 
-              type="submit" 
-              fullWidth>
-                Update Club Info
-              </MDButton>
+          <MDBox mt={4} mb={1}>
+            <MDButton variant="gradient" color="success" type="submit" fullWidth>
+              Update Club Info
+            </MDButton>
+          </MDBox>
         </MDBox>
-      </MDBox>
-    </Paper>
+      </Paper>
     </DashboardLayout>
   );
 }
