@@ -7,6 +7,7 @@ import clubLoginSlice from "./slices/clubs/loginSlice";
 import clubRegisterSlice from "./slices/clubs/registerSlice";
 import postFetchSlice from "./slices/posts/postFetch";
 import postUploadSlice from "./slices/posts/postUpload";
+import clubUpdateSlice from "./slices/clubs/updateSlice";
 
 const MyMiddlewares = [logger, thunk];
 
@@ -18,6 +19,7 @@ const store = configureStore({
     clubRegister: clubRegisterSlice.reducer,
     postFetch: postFetchSlice.reducer,
     postUpload: postUploadSlice.reducer,
+    clubUpdate: clubUpdateSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -27,6 +29,7 @@ const store = configureStore({
           "student/studentLogout/fulfilled",
           "staff/staffLogout/fulfilled",
           "club/clubLogout/fulfilled",
+          "club/clubUpdate/fulfilled",
         ],
       },
     }).concat(MyMiddlewares),
