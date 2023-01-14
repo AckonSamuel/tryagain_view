@@ -71,8 +71,8 @@ function Cover() {
   const showdata = () => {
     const data = getValues();
     dispatch(clubSignUp(data)).then((res) => {
-      if (res) {
-        navigate("/auth/clubs/login");
+      if (res.type === "club/clubSignUP/fulfilled") {
+        navigate("/authentication/sign-in");
       }
     });
   };

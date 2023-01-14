@@ -68,7 +68,7 @@ function Basic() {
 
     dispatch(clubLogin(data)).then((res) => {
       if (res.type === "club/clubLogin/fulfilled") {
-        navigate("/dashboard");
+        navigate("/club/edit");
       }
       // if (res.type === "student/studentLogout/rejected") {
       // }
