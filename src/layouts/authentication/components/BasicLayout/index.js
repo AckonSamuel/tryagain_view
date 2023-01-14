@@ -39,7 +39,7 @@ function BasicLayout({ image, children }) {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <MDBox px={1} width="100%" height="100vh" mx="auto">
+      {/* <MDBox px={1} width="100%" height="100vh" mx="auto">
         <Grid
           container
           spacing={1}
@@ -49,6 +49,16 @@ function BasicLayout({ image, children }) {
             marginLeft: "68%",
           }}
         >
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            {children}
+          </Grid>
+        </Grid>
+      </MDBox> */}
+      <MDBox px={1} width="100%" height="100vh" mx="auto">
+        <Grid container spacing={1}
+        justifyContent="center"
+        alignItems="center" 
+        height="100%">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             {children}
           </Grid>

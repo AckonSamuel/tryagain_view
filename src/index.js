@@ -8,8 +8,6 @@ import App from "App";
 import { MaterialUIControllerProvider } from "context";
 import store from "./redux/configStore";
 
-// Material Dashboard 2 React Context Provider
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
