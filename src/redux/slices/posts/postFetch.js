@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "redux/common";
 
 const initialState = {
   post: [],
@@ -8,7 +9,8 @@ const initialState = {
 };
 
 export const postFetch = createAsyncThunk("post/postFetch", async () => {
-  const res = await axios.get("http://localhost:3000/posts");
+  const clubId = JSON.parse(localStorage.getItem("club")).data.id;
+  const res = await axios.get(`${BASE_URL}/clubs/${clubId}`);
   return res;
 });
 

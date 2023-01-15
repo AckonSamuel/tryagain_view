@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import BASE_URL from "redux/common";
 
 const initialState = {
   photos: [],
@@ -7,10 +8,21 @@ const initialState = {
   loading: false,
 };
 
-export const postUpload = createAsyncThunk("post/postUpload", async (post) => {
-  const res = await axios.post("http://localhost:3000/posts", post, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+// export const clubUpdate = createAsyncThunk("club/clubUpdate", async (club) => {
+//   const clubId = JSON.parse(localStorage.getItem("club")).data.id;
+//   const res = await axios.patch(`${BASE_URL}/clubs/${clubId}`, { club });
+//   return res.data;
+// });
+
+export const postUpload = createAsyncThunk("post/postUpload", async (club) => {
+  const clubId = JSON.parse(localStorage.getItem("club")).data.id;
+  const res = await axios.patch(
+    `${BASE_URL}/clubs/${clubId}`,
+    { club },
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    }
+  );
 
   return res;
 });

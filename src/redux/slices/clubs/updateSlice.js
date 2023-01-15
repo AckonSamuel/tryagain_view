@@ -11,9 +11,6 @@ const initialState = {
 export const clubUpdate = createAsyncThunk("club/clubUpdate", async (club) => {
   const clubId = JSON.parse(localStorage.getItem("club")).data.id;
   const res = await axios.patch(`${BASE_URL}/clubs/${clubId}`, { club });
-  //   if (res.data.accessToken) {
-  //     localStorage.setItem("club", JSON.stringify(res.data));
-  //   }
   return res.data;
 });
 

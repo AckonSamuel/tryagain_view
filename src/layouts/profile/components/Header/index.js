@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -10,6 +11,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Icon from "@mui/material/Icon";
+import Tooltip from "@mui/material/Tooltip";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -60,14 +62,39 @@ function Header({ children }) {
         sx={{
           backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
             `${linearGradient(
-              rgba(gradients.info.main, 0.6),
-              rgba(gradients.info.state, 0.6)
+              rgba(gradients.info.main, 0.0),
+              rgba(gradients.info.state, 0.0)
             )}, url(${backgroundImage})`,
+          "&:hover": {
+            backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
+              `${linearGradient(
+                rgba(gradients.info.main, 0.6),
+                rgba(gradients.info.state, 0.6)
+              )}, url(${backgroundImage})`,
+          },
+          "&:hover .tabby": { display: "block", cursor: "pointer" },
           backgroundSize: "cover",
           backgroundPosition: "50%",
           overflow: "hidden",
+          cursor: "pointer",
         }}
-      />
+      >
+        <MDTypography
+          className="tabby"
+          component={Link}
+          to=""
+          variant="body2"
+          color="black"
+          sx={{
+            display: "none",
+            margin: "auto",
+          }}
+        >
+          <Tooltip title="Change Banner Photo" placement="top">
+            <Icon fontSize="medium">edit</Icon>
+          </Tooltip>
+        </MDTypography>
+      </MDBox>
       <Card
         sx={{
           position: "relative",
@@ -78,8 +105,33 @@ function Header({ children }) {
         }}
       >
         <Grid container spacing={3} alignItems="center">
-          <Grid item>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              width: 100,
+              cursor: "pointer",
+              paddingRight: 12,
+              "&:hover .tabb": { display: "block", cursor: "pointer" },
+            }}
+          >
             <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDBox>
+              <MDTypography
+                className="tabb"
+                component={Link}
+                to=""
+                variant="body2"
+                color="secondary"
+                sx={{
+                  display: "none",
+                }}
+              >
+                <Tooltip title="Change Profile Photo" placement="top">
+                  <Icon>edit</Icon>
+                </Tooltip>
+              </MDTypography>
+            </MDBox>
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
