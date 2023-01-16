@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Icon from "@mui/material/Icon";
-import Tooltip from "@mui/material/Tooltip";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
+
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
+import Icon from "@mui/material/Icon";
+import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
@@ -24,6 +22,8 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
+
+import PhotoUpload from "./PhotoUpload";
 
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -79,21 +79,15 @@ function Header({ children }) {
           cursor: "pointer",
         }}
       >
-        <MDTypography
+        <MDBox
           className="tabby"
-          component={Link}
-          to=""
-          variant="body2"
-          color="black"
           sx={{
             display: "none",
             margin: "auto",
           }}
         >
-          <Tooltip title="Change Banner Photo" placement="top">
-            <Icon fontSize="medium">edit</Icon>
-          </Tooltip>
-        </MDTypography>
+          <PhotoUpload size="medium" title="Change Banner Photo" regis="banner_photo" />
+        </MDBox>
       </MDBox>
       <Card
         sx={{
@@ -117,20 +111,14 @@ function Header({ children }) {
           >
             <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
             <MDBox>
-              <MDTypography
+              <MDBox
                 className="tabb"
-                component={Link}
-                to=""
-                variant="body2"
-                color="secondary"
                 sx={{
                   display: "none",
                 }}
               >
-                <Tooltip title="Change Profile Photo" placement="top">
-                  <Icon>edit</Icon>
-                </Tooltip>
-              </MDTypography>
+                <PhotoUpload size="small" title="Change Profile Photo" regis="profile_image" />
+              </MDBox>
             </MDBox>
           </Grid>
           <Grid item>
