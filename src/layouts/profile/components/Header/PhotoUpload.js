@@ -20,7 +20,7 @@ import { postUpload } from "../../../../redux/slices/posts/postUpload";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function PhotoUpload({ size, title, regis }) {
+export default function PhotoUpload({ size, title }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const { register, handleSubmit, getValues } = useForm();
@@ -97,7 +97,7 @@ export default function PhotoUpload({ size, title, regis }) {
 PhotoUpload.propTypes = {
   size: PropTypes.string,
   title: PropTypes.string,
-  regis: PropTypes.string.isRequired,
+  // regis: PropTypes.string.isRequired,
 };
 
 PhotoUpload.defaultProps = {
