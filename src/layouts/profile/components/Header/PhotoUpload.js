@@ -20,7 +20,7 @@ import { postUpload } from "../../../../redux/slices/posts/postUpload";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function PhotoUpload({ size, title }) {
+export default function PhotoUpload({ size, title, regis }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
   const { register, handleSubmit, getValues } = useForm();
@@ -42,14 +42,24 @@ export default function PhotoUpload({ size, title }) {
     // };
 
     // formData.append("banner_photo", club.banner_photo);
-    const data = getValues();
+    const vad = getValues();
+    console.log(vad);
+    const data =
+      regis === "banner_photo"
+        ? {
+            banner_photo: vad.banner_photo[0],
+          }
+        : {
+            profile_photo: vad.profile_photo[0],
+          };
+
     console.log(data);
     dispatch(postUpload(data)).then((res) => {
       setLoading(true);
       if (res.type === "post/postUpload/fulfilled") {
         setLoading(false);
         setOpen(false);
-        window.location.reload();
+        // window.location.reload();
       }
       if (res.type === "post/postUpload/rejected") {
         setLoading(false);
@@ -77,7 +87,7 @@ export default function PhotoUpload({ size, title }) {
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
                 <FormControl>
-                  <Input type="file" accept="image/*" {...register("banner_photo")} />
+                  <Input type="file" accept="image/*" name={regis} {...register(regis)} />
                 </FormControl>
               </DialogContentText>
             </DialogContent>
@@ -97,7 +107,7 @@ export default function PhotoUpload({ size, title }) {
 PhotoUpload.propTypes = {
   size: PropTypes.string,
   title: PropTypes.string,
-  // regis: PropTypes.string.isRequired,
+  regis: PropTypes.string.isRequired,
 };
 
 PhotoUpload.defaultProps = {

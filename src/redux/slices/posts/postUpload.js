@@ -15,7 +15,9 @@ const initialState = {
 // });
 
 export const postUpload = createAsyncThunk("post/postUpload", async (club) => {
+  console.log(club);
   const clubId = JSON.parse(localStorage.getItem("club")).data.id;
+  console.log(clubId);
   const res = await axios.patch(`${BASE_URL}/clubs/${clubId}`, club, {
     headers: { "Content-Type": "multipart/form-data" },
   });

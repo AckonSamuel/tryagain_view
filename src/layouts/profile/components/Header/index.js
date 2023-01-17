@@ -25,7 +25,7 @@ import backgroundImage from "assets/images/bg-profile.jpeg";
 
 import PhotoUpload from "./PhotoUpload";
 
-function Header({ children }) {
+function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -64,13 +64,13 @@ function Header({ children }) {
             `${linearGradient(
               rgba(gradients.info.main, 0.0),
               rgba(gradients.info.state, 0.0)
-            )}, url(${backgroundImage})`,
+            )}, url(${bannerPhotoUrl})`,
           "&:hover": {
             backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
               `${linearGradient(
                 rgba(gradients.info.main, 0.6),
                 rgba(gradients.info.state, 0.6)
-              )}, url(${backgroundImage})`,
+              )}, url(${bannerPhotoUrl})`,
           },
           "&:hover .tabby": { display: "block", cursor: "pointer" },
           backgroundSize: "cover",
@@ -109,7 +109,7 @@ function Header({ children }) {
               "&:hover .tabb": { display: "block", cursor: "pointer" },
             }}
           >
-            <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar src={profilePhotoUrl} alt="profile-image" size="xl" shadow="sm" />
             <MDBox>
               <MDBox
                 className="tabb"
@@ -117,17 +117,17 @@ function Header({ children }) {
                   display: "none",
                 }}
               >
-                <PhotoUpload size="small" title="Change Profile Photo" regis="profile_image" />
+                <PhotoUpload size="small" title="Change Profile Photo" regis="profile_photo" />
               </MDBox>
             </MDBox>
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                Richard Davis
+                {clubName}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                CEO / Co-Founder
+                {group}
               </MDTypography>
             </MDBox>
           </Grid>
@@ -171,11 +171,17 @@ function Header({ children }) {
 // Setting default props for the Header
 Header.defaultProps = {
   children: "",
+  bannerPhotoUrl: backgroundImage,
+  profilePhotoUrl: burceMars,
 };
 
 // Typechecking props for the Header
 Header.propTypes = {
   children: PropTypes.node,
+  clubName: PropTypes.string.isRequired,
+  group: PropTypes.string.isRequired,
+  profilePhotoUrl: PropTypes.string,
+  bannerPhotoUrl: PropTypes.string,
 };
 
 export default Header;
