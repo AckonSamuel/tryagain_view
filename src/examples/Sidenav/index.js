@@ -22,6 +22,7 @@ import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
+import Logout from "layouts/authentication/sign-out";
 
 // Material Dashboard 2 React context
 import {
@@ -163,6 +164,18 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
+      <MDBox
+        sx={{
+          marginTop: "auto",
+          marginBottom: "2em",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Logout />
+      </MDBox>
     </SidenavRoot>
   );
 }

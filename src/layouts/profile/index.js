@@ -2,13 +2,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import Skeleton from "@mui/material/Skeleton";
-// import Grid from "@mui/material/Grid";
-// import Divider from "@mui/material/Divider";
 
 // @mui icons
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import InstagramIcon from "@mui/icons-material/Instagram";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -18,22 +13,10 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 // import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-// import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
 import Header from "layouts/profile/components/Header";
-
-// Data
-
-// Images
-// import homeDecor1 from "assets/images/home-decor-1.jpg";
-// import homeDecor2 from "assets/images/home-decor-2.jpg";
-// import homeDecor3 from "assets/images/home-decor-3.jpg";
-// import homeDecor4 from "assets/images/home-decor-4.jpeg";
-// import team1 from "assets/images/team-1.jpg";
-// import team2 from "assets/images/team-2.jpg";
-// import team3 from "assets/images/team-3.jpg";
-// import team4 from "assets/images/team-4.jpg";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import { myClubFetch } from "redux/slices/clubs/getMyClub";
 
@@ -49,7 +32,7 @@ function Overview() {
   const { club } = myClub;
 
   const clubName = club.attributes ? club.attributes.club_name : <Skeleton width={100} />;
-  const description = club.attributes ? club.attributes.description : <Skeleton width={500} />;
+  const description = club.attributes ? club.attributes.description : <Skeleton width={1000} />;
   const meetingLocation = club.attributes ? (
     club.attributes.meeting_location
   ) : (
@@ -67,12 +50,9 @@ function Overview() {
   const bannerPhotoUrl = club.attributes ? club.attributes.banner_photo_url : "";
   const profilePhotoUrl = club.attributes ? club.attributes.profile_photo_url : "";
 
-  // const { club_name, description } = myClub.attributes
-
-  console.log(myClub);
   return (
     <DashboardLayout>
-      {/* <DashboardNavbar /> */}
+      <DashboardNavbar />
       <MDBox mb={2} />
       <Header
         clubName={clubName}
@@ -93,7 +73,7 @@ function Overview() {
               time: meetingTime,
               group,
             }}
-            action={{ route: "/club/edit", tooltip: "Edit Profile" }}
+            action={{ route: "/profile/edit", tooltip: "Edit Profile" }}
             shadow={false}
           />
         </MDBox>

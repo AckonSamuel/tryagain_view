@@ -1,15 +1,14 @@
 // react-router-dom components
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
-
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-// import * as Yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -35,20 +34,21 @@ import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 import { clubSignUp } from "redux/slices/clubs/registerSlice";
 
-// const formSchema = Yup.object({
-//   email: Yup.string().email(),
-//   password: Yup.string()
-//     .min(4, "Password length should be at least 4 characters")
-//     .max(12, "Password cannot exceed more than 12 characters"),
-//   password_confirmation: Yup.string().oneOf([Yup.ref("password")], "Passwords do not match"),
-//   phone_number: Yup.number()
-//     .required("Phone number is required")
-//     .min(10, "Should contain at least 10 digits"),
-// }).required();
+const formSchema = Yup.object({
+  email: Yup.string().email(),
+  password: Yup.string()
+    .min(4, "Password length should be at least 4 characters")
+    .max(12, "Password cannot exceed more than 12 characters"),
+  password_confirmation: Yup.string().oneOf([Yup.ref("password")], "Passwords do not match"),
+}).required();
 
 function Cover() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [submitted, setSubmitted] = useState(false);
+
+  const loading = useSelector((state) => state.clubRegister.loading);
+  const error = useSelector((state) => state.clubRegister.error);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -61,21 +61,31 @@ function Cover() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
     // watch,
     getValues,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
   // password = watch("password", "");
 
   const showdata = () => {
-    const data = getValues();
-    dispatch(clubSignUp(data)).then((res) => {
-      if (res.type === "club/clubSignUP/fulfilled") {
-        navigate("/authentication/sign-in");
-      }
-    });
+    setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (submitted) {
+      setSubmitted(false);
+      const data = getValues();
+
+      dispatch(clubSignUp(data)).then((res) => {
+        if (res.type === "club/clubSignUP/fulfilled") {
+          navigate("/");
+        }
+      });
+    }
+  }, [submitted]);
 
   return (
     <CoverLayout image={bgImage}>
@@ -105,6 +115,7 @@ function Cover() {
                 type="text"
                 label="Name"
                 variant="standard"
+                disabled={loading}
                 fullWidth
                 {...register("club_name", { required: true })}
               />
@@ -114,9 +125,11 @@ function Cover() {
                 type="email"
                 label="Email"
                 variant="standard"
+                disabled={loading}
                 fullWidth
                 {...register("email", { required: true })}
               />
+              <p>{errors.email ? errors.email.message : ""}</p>
             </MDBox>
             <MDBox mb={2}>
               <FormControl sx={{ width: "100%" }} variant="standard">
@@ -125,6 +138,7 @@ function Cover() {
                   id="standard-adornment-password"
                   autoComplete="current-password"
                   fullWidth
+                  disabled={loading}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -148,6 +162,7 @@ function Cover() {
                 <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
                 <Input
                   id="out-basic"
+                  disabled={loading}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -165,6 +180,7 @@ function Cover() {
                   {...register("password_confirmation")}
                   required
                 />
+                <p>{errors.password_confirmation ? errors.password_confirmation.message : ""}</p>
               </FormControl>
             </MDBox>
             <MDBox mb={2}>
@@ -172,14 +188,23 @@ function Cover() {
                 type="integer"
                 label="Telephone number"
                 variant="standard"
+                disabled={loading}
                 fullWidth
                 {...register("telephone_number", { required: true })}
               />
+              <p>{errors.phone_number ? errors.phone_number.message : ""}</p>
             </MDBox>
             <MDBox mb={2}>
               <FormControl fullWidth variant="standard">
                 <InputLabel htmlFor="group">Group</InputLabel>
-                <Select {...register("group")} required id="group" label="group" variant="standard">
+                <Select
+                  disabled={loading}
+                  {...register("group")}
+                  required
+                  id="group"
+                  label="group"
+                  variant="standard"
+                >
                   <MenuItem value="Religious">Religious</MenuItem>
                   <MenuItem value="Alumni">Alumni</MenuItem>
                   <MenuItem value="Ethnic">Ethnic</MenuItem>
@@ -194,7 +219,7 @@ function Cover() {
               </FormControl>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox />
+              <Checkbox disabled={loading} />
               <MDTypography
                 variant="button"
                 fontWeight="regular"
@@ -215,16 +240,29 @@ function Cover() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="success" type="submit" fullWidth>
-                sign Up
+              <MDButton
+                variant="gradient"
+                disabled={loading}
+                color="success"
+                type="submit"
+                fullWidth
+              >
+                {loading ? "Creating club..." : "Join Clubs"}
               </MDButton>
             </MDBox>
+            {error.length > 0 && (
+              <MDBox mt={2}>
+                <MDTypography variant="h6" color="warning">
+                  Failed to Sign up. Please tryagain.
+                </MDTypography>
+              </MDBox>
+            )}
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Already have an account?{" "}
                 <MDTypography
                   component={Link}
-                  to="#"
+                  to="/"
                   variant="button"
                   color="success"
                   fontWeight="medium"

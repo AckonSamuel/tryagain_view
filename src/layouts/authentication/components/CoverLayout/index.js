@@ -11,6 +11,7 @@ import MDBox from "components/MDBox";
 // Material Dashboard 2 React example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
+import Copyright from "Copyright";
 // Authentication layout components
 
 function CoverLayout({ coverHeight, image, children }) {
@@ -43,6 +44,7 @@ function CoverLayout({ coverHeight, image, children }) {
           </Grid>
         </Grid>
       </MDBox>
+      <Copyright sx={{ mt: 10 }} />
     </PageLayout>
   );
 }

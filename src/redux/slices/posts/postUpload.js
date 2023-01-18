@@ -8,16 +8,8 @@ const initialState = {
   loading: false,
 };
 
-// export const clubUpdate = createAsyncThunk("club/clubUpdate", async (club) => {
-//   const clubId = JSON.parse(localStorage.getItem("club")).data.id;
-//   const res = await axios.patch(`${BASE_URL}/clubs/${clubId}`, { club });
-//   return res.data;
-// });
-
 export const postUpload = createAsyncThunk("post/postUpload", async (club) => {
-  console.log(club);
   const clubId = JSON.parse(localStorage.getItem("club")).data.id;
-  console.log(clubId);
   const res = await axios.patch(`${BASE_URL}/clubs/${clubId}`, club, {
     headers: { "Content-Type": "multipart/form-data" },
   });

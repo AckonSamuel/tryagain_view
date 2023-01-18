@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
@@ -13,18 +13,22 @@ import Slide from "@mui/material/Slide";
 import FormControl from "@mui/material/FormControl";
 import Tooltip from "@mui/material/Tooltip";
 import Input from "@mui/material/Input";
+import CircularProgress from "@mui/material/CircularProgress";
 import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
-import MDProgress from "components/MDProgress";
+import MDTypography from "components/MDTypography";
 import { postUpload } from "../../../../redux/slices/posts/postUpload";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function PhotoUpload({ size, title, regis }) {
   const dispatch = useDispatch();
-  const [loading, setLoading] = React.useState(false);
   const { register, handleSubmit, getValues } = useForm();
   const [open, setOpen] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const loading = useSelector((state) => state.postUpload.loading, shallowEqual);
+  const error = useSelector((state) => state.postUpload.error, shallowEqual);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,37 +39,29 @@ export default function PhotoUpload({ size, title, regis }) {
   };
 
   const fileUpload = () => {
-    // const formData = new FormData();
-    // const club = {
-    //   ...data,
-    //   banner_photo: data.banner_photo[0],
-    // };
-
-    // formData.append("banner_photo", club.banner_photo);
-    const vad = getValues();
-    console.log(vad);
-    const data =
-      regis === "banner_photo"
-        ? {
-            banner_photo: vad.banner_photo[0],
-          }
-        : {
-            profile_photo: vad.profile_photo[0],
-          };
-
-    console.log(data);
-    dispatch(postUpload(data)).then((res) => {
-      setLoading(true);
-      if (res.type === "post/postUpload/fulfilled") {
-        setLoading(false);
-        setOpen(false);
-        // window.location.reload();
-      }
-      if (res.type === "post/postUpload/rejected") {
-        setLoading(false);
-      }
-    });
+    setSubmitted(true);
   };
+
+  React.useEffect(() => {
+    if (submitted) {
+      const vad = getValues();
+      const data =
+        regis === "banner_photo"
+          ? {
+              banner_photo: vad.banner_photo[0],
+            }
+          : {
+              profile_photo: vad.profile_photo[0],
+            };
+
+      dispatch(postUpload(data)).then((res) => {
+        if (res.type === "post/postUpload/fulfilled") {
+          setOpen(false);
+          window.location.reload();
+        }
+      });
+    }
+  }, [submitted]);
 
   return (
     <>
@@ -73,32 +69,45 @@ export default function PhotoUpload({ size, title, regis }) {
         <Icon fontSize={size}>edit</Icon>
       </Tooltip>
       <MDBox component="form" role="form">
-        {loading ? (
-          <MDProgress />
-        ) : (
-          <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <DialogTitle>Choose photo</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                <FormControl>
-                  <Input type="file" accept="image/*" name={regis} {...register(regis)} />
-                </FormControl>
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button type="button" onClick={handleSubmit(fileUpload)}>
-                Upload
-              </Button>
-            </DialogActions>
-          </Dialog>
-        )}
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          {loading ? (
+            <MDBox p={6}>
+              <CircularProgress color="success" />
+            </MDBox>
+          ) : (
+            <>
+              <DialogTitle>Choose photo</DialogTitle>
+              <DialogContent>
+                <DialogContentText
+                  display="flex"
+                  flexDirection="column"
+                  id="alert-dialog-slide-description"
+                >
+                  {error.length > 0 && (
+                    <MDTypography variant="span" color="error">
+                      Upload unsuccessful
+                    </MDTypography>
+                  )}
+                  <FormControl>
+                    <Input type="file" accept="image/*" name={regis} {...register(regis)} />
+                  </FormControl>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button type="button" onClick={handleSubmit(fileUpload)}>
+                  Upload
+                </Button>
+              </DialogActions>
+            </>
+          )}
+        </Dialog>
       </MDBox>
     </>
   );

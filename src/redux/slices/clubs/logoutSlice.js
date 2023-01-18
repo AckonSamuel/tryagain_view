@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import BASE_URL from "redux/common";
-import clubAuthHeader from "../../services/clubs/auth-header";
 
 const initialState = {
   club: {},
@@ -10,8 +9,11 @@ const initialState = {
 };
 
 export const clubLogout = createAsyncThunk("club/clubLogout", async () => {
+  const token = JSON.parse(localStorage.getItem("club")).accessToken;
   const res = await axios.delete(`${BASE_URL}/auth/clubs/logout`, {
-    headers: clubAuthHeader(),
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   if (res.data.status === 200) {
     localStorage.removeItem("club");

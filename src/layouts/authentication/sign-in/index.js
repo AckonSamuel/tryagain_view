@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
 
 // react-redux component
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -41,6 +41,10 @@ function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
+
+  const loading = useSelector((state) => state.clubLogin.loading);
+  const error = useSelector((state) => state.clubLogin.error);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -64,23 +68,28 @@ function Basic() {
   } = useForm();
 
   const showdata = () => {
-    const data = getValues();
-
-    dispatch(clubLogin(data)).then((res) => {
-      if (res.type === "club/clubLogin/fulfilled") {
-        navigate("/club/edit");
-      }
-      // if (res.type === "student/studentLogout/rejected") {
-      // }
-    });
+    setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (submitted) {
+      setSubmitted(false);
+      const data = getValues();
+
+      dispatch(clubLogin(data)).then((res) => {
+        if (res.type === "club/clubLogin/fulfilled") {
+          navigate("/profile");
+        }
+      });
+    }
+  }, [submitted]);
 
   return (
     <BasicLayout image={bgImage}>
       <Card>
         <MDBox
           variant="gradient"
-          // bgColor="success"
+          bgColor="success"
           borderRadius="lg"
           coloredShadow="info"
           mx={2}
@@ -90,91 +99,89 @@ function Basic() {
           textAlign="center"
         >
           <MDlogo />
-          <MDTypography variant="h4" fontWeight="medium" color="dark" mt={0.4}>
+          <MDTypography variant="h4" fontWeight="medium" color="white" mt={0.4}>
             Sign in
           </MDTypography>
         </MDBox>
-        <MDBox
-          // pt={4} pb={3} px={3}
-          variant="gradient"
-          // bgColor="success"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
-        >
-          <MDBox component="form" role="form" onSubmit={handleSubmit(showdata)}>
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                {...register("email", {
-                  required: true,
-                  // pattern: /@st.knust.edu.gh/i
-                })}
+
+        <MDBox p={2} component="form" role="form" onSubmit={handleSubmit(showdata)}>
+          {error.length > 0 && (
+            <MDBox mt={2}>
+              <MDTypography variant="h6" color="warning">
+                Sign in Failed. Invalid credentials.
+              </MDTypography>
+            </MDBox>
+          )}
+          <MDBox mb={2}>
+            <MDInput
+              type="email"
+              label="Email"
+              disabled={loading}
+              {...register("email", {
+                required: true,
+                // pattern: /@st.knust.edu.gh/i
+              })}
+              fullWidth
+            />
+          </MDBox>
+          <MDBox mb={2}>
+            <FormControl sx={{ width: "100%" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                autoComplete="current-password"
                 fullWidth
+                disabled={loading}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+                {...register("password", { required: true })}
               />
-            </MDBox>
-            <MDBox mb={2}>
-              <FormControl sx={{ width: "100%" }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  autoComplete="current-password"
-                  fullWidth
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                  {...register("password", { required: true })}
-                />
-              </FormControl>
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+            </FormControl>
+          </MDBox>
+          <MDBox display="flex" alignItems="center" ml={-1}>
+            <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+            <MDTypography
+              variant="button"
+              fontWeight="regular"
+              color="text"
+              onClick={handleSetRememberMe}
+              sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+            >
+              &nbsp;&nbsp;Remember me
+            </MDTypography>
+          </MDBox>
+          <MDBox mt={4} mb={1}>
+            <MDButton disabled={loading} variant="gradient" color="success" type="submit" fullWidth>
+              {loading ? "Authenticating club..." : "Sign in"}
+            </MDButton>
+          </MDBox>
+          <MDBox mt={3} mb={1} textAlign="center">
+            <MDTypography variant="button" color="text">
+              Don&apos;t have an account?{" "}
               <MDTypography
+                component={Link}
+                disabled={loading}
+                to="/authentication/sign-up"
                 variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                color="success"
+                fontWeight="medium"
+                textGradient
               >
-                &nbsp;&nbsp;Remember me
+                Sign up
               </MDTypography>
-            </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="success" type="submit" fullWidth>
-                sign in
-              </MDButton>
-            </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="success"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign up
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
+            </MDTypography>
           </MDBox>
         </MDBox>
       </Card>

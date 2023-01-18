@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+// import AppBar from "@mui/material/AppBar";
+// import Tabs from "@mui/material/Tabs";
+// import Tab from "@mui/material/Tab";
 
 // Material Dashboard 2 React components
 
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React base styles
@@ -27,7 +27,7 @@ import PhotoUpload from "./PhotoUpload";
 
 function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
+  // const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -49,7 +49,7 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
 
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   return (
     <MDBox position="relative" mb={5}>
@@ -64,13 +64,13 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
             `${linearGradient(
               rgba(gradients.info.main, 0.0),
               rgba(gradients.info.state, 0.0)
-            )}, url(${bannerPhotoUrl})`,
+            )}, url(${bannerPhotoUrl !== null ? bannerPhotoUrl : backgroundImage})`,
           "&:hover": {
             backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
               `${linearGradient(
                 rgba(gradients.info.main, 0.6),
                 rgba(gradients.info.state, 0.6)
-              )}, url(${bannerPhotoUrl})`,
+              )}, url(${bannerPhotoUrl !== null ? bannerPhotoUrl : backgroundImage})`,
           },
           "&:hover .tabby": { display: "block", cursor: "pointer" },
           backgroundSize: "cover",
@@ -109,7 +109,12 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
               "&:hover .tabb": { display: "block", cursor: "pointer" },
             }}
           >
-            <MDAvatar src={profilePhotoUrl} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar
+              src={profilePhotoUrl !== null ? profilePhotoUrl : burceMars}
+              alt="profile-image"
+              size="xl"
+              shadow="sm"
+            />
             <MDBox>
               <MDBox
                 className="tabb"
@@ -131,7 +136,7 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
               </MDTypography>
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+          {/* <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
@@ -160,7 +165,7 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
                 />
               </Tabs>
             </AppBar>
-          </Grid>
+          </Grid> */}
         </Grid>
         {children}
       </Card>
@@ -171,17 +176,17 @@ function Header({ children, clubName, group, bannerPhotoUrl, profilePhotoUrl }) 
 // Setting default props for the Header
 Header.defaultProps = {
   children: "",
-  bannerPhotoUrl: backgroundImage,
-  profilePhotoUrl: burceMars,
+  profilePhotoUrl: backgroundImage,
+  bannerPhotoUrl: burceMars,
 };
 
 // Typechecking props for the Header
 Header.propTypes = {
   children: PropTypes.node,
-  clubName: PropTypes.string.isRequired,
-  group: PropTypes.string.isRequired,
-  profilePhotoUrl: PropTypes.string,
-  bannerPhotoUrl: PropTypes.string,
+  clubName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  group: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  profilePhotoUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  bannerPhotoUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default Header;

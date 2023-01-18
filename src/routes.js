@@ -23,9 +23,10 @@
 // Material Dashboard 2 React layouts
 // import Dashboard from "layouts/dashboard";
 import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
 import UpdateClubForm from "layouts/updates";
+import Logout from "layouts/authentication/sign-out";
+import SignIn from "layouts//authentication/sign-in";
+import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -48,15 +49,15 @@ const routes = [
     component: <Profile />,
   },
   {
-    type: "collapse",
+    // type: "collapse",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
+    route: "/",
     component: <SignIn />,
   },
   {
-    type: "collapse",
+    // type: "collapse",
     name: "Sign Up",
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,
@@ -68,8 +69,16 @@ const routes = [
     name: "Club Update",
     key: "update",
     icon: <Icon fontSize="small">edit</Icon>,
-    route: "/club/edit",
+    route: "/profile/edit",
     component: <UpdateClubForm />,
+  },
+  {
+    // type: "collapse",
+    name: "Signout",
+    key: "logout",
+    icon: <Icon fontSize="small">logout</Icon>,
+    route: "/club/logout",
+    component: <Logout />,
   },
 ];
 

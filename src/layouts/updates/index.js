@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { clubUpdate } from "redux/slices/clubs/updateSlice";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import MDButton from "components/MDButton";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 export default function UpdateClubForm() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function UpdateClubForm() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <Paper
         elevation={9}
         sx={{

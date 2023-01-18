@@ -11,6 +11,7 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React context
 import { useMaterialUIController, setLayout } from "context";
+import Copyright from "Copyright";
 
 function DashboardLayout({ children }) {
   const [controller, dispatch] = useMaterialUIController();
@@ -37,6 +38,7 @@ function DashboardLayout({ children }) {
       })}
     >
       {children}
+      <Copyright sx={{ mt: 50 }} />
     </MDBox>
   );
 }
