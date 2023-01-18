@@ -119,8 +119,8 @@ ProfileInfoCard.defaultProps = {
 // Typechecking props for the ProfileInfoCard
 ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  info: PropTypes.objectOf(PropTypes.string).isRequired,
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  info: PropTypes.oneOfType([PropTypes.objectOf(PropTypes.string), PropTypes.object]).isRequired,
   // social: PropTypes.arrayOf(PropTypes.object).isRequired,
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,

@@ -1,6 +1,7 @@
 // @mui material components
 import React, { useEffect } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import Skeleton from "@mui/material/Skeleton";
 // import Grid from "@mui/material/Grid";
 // import Divider from "@mui/material/Divider";
 
@@ -47,14 +48,22 @@ function Overview() {
 
   const { club } = myClub;
 
-  const clubName = club.attributes ? club.attributes.club_name : "loading";
-  const description = club.attributes ? club.attributes.description : "loading";
-  const meetingLocation = club.attributes ? club.attributes.meeting_location : "loading";
-  const email = club.attributes ? club.attributes.email : "loading";
-  const history = club.attributes ? club.attributes.history : "loading";
-  const meetingTime = club.attributes ? club.attributes.meeting_time : "loading";
-  const telephoneNumber = club.attributes ? club.attributes.telephone_number : "loading";
-  const group = club.attributes ? club.attributes.group : "loading";
+  const clubName = club.attributes ? club.attributes.club_name : <Skeleton width={100} />;
+  const description = club.attributes ? club.attributes.description : <Skeleton width={500} />;
+  const meetingLocation = club.attributes ? (
+    club.attributes.meeting_location
+  ) : (
+    <Skeleton width={100} />
+  );
+  const email = club.attributes ? club.attributes.email : <Skeleton width={100} />;
+  const history = club.attributes ? club.attributes.history : <Skeleton width={100} />;
+  const meetingTime = club.attributes ? club.attributes.meeting_time : <Skeleton width={100} />;
+  const telephoneNumber = club.attributes ? (
+    club.attributes.telephone_number
+  ) : (
+    <Skeleton width={100} />
+  );
+  const group = club.attributes ? club.attributes.group : <Skeleton width={100} />;
   const bannerPhotoUrl = club.attributes ? club.attributes.banner_photo_url : "";
   const profilePhotoUrl = club.attributes ? club.attributes.profile_photo_url : "";
 
