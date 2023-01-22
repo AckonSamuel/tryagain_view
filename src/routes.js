@@ -30,6 +30,9 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Tables from "layouts/tables";
+import Witness from "examples/Registrations/Witness";
+import RequiredDocuments from "examples/Registrations/RequiredDocuments";
 
 const routes = [
   // {
@@ -79,6 +82,38 @@ const routes = [
     icon: <Icon fontSize="small">logout</Icon>,
     route: "/club/logout",
     component: <Logout />,
+  },
+  {
+    type: "collapse",
+    name: "Executives",
+    key: "executives",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/executive",
+    component: <Tables />,
+  },
+  {
+    type: "collapse",
+    name: "Witness 1",
+    key: "witness_one",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/first_witness",
+    component: <Witness />,
+  },
+  {
+    type: "collapse",
+    name: "Witness 2",
+    key: "witness_two",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/second_witness",
+    component: <Witness />,
+  },
+  {
+    type: "collapse",
+    name: "Required Document",
+    key: "req_docs",
+    icon: <Icon fontSize="small">notes</Icon>,
+    route: "/required-documents",
+    component: <RequiredDocuments />,
   },
 ];
 

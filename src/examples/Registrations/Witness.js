@@ -12,6 +12,10 @@ import { clubUpdate } from "redux/slices/clubs/updateSlice";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import MDButton from "components/MDButton";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 export default function UpdateClubForm() {
   const dispatch = useDispatch();
@@ -49,9 +53,10 @@ export default function UpdateClubForm() {
         elevation={9}
         sx={{
           padding: "2em",
+          height: "100vh",
         }}
       >
-        <Typography variant="h5">Update club info</Typography>
+        <Typography variant="h5">Witness</Typography>
         {error.length > 0 && (
           <MDBox mt={2}>
             <Typography variant="h5" color="red">
@@ -68,13 +73,20 @@ export default function UpdateClubForm() {
           </MDBox>
         ) : (
           <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={3}>
+            <Grid
+              container
+              spacing={3}
+              sx={{
+                height: "100%",
+                mb: 2,
+              }}
+            >
               <Grid item xs={12}>
                 <TextField
                   required
                   id="history"
                   multiline
-                  label="History"
+                  label="Name of Patron"
                   fullWidth
                   autoComplete="given-name"
                   variant="standard"
@@ -86,7 +98,7 @@ export default function UpdateClubForm() {
                   required
                   id="description"
                   {...register("description")}
-                  label="desciption"
+                  label="Office in KNUST"
                   fullWidth
                   multiline
                   autoComplete="family-name"
@@ -98,7 +110,7 @@ export default function UpdateClubForm() {
                   required
                   id="meeting-time"
                   {...register("meeting_time")}
-                  label="Meeting times"
+                  label="Phone Number"
                   fullWidth
                   multiline
                   autoComplete="meeting-time"
@@ -107,28 +119,45 @@ export default function UpdateClubForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="meeting-location"
-                  label="meeting_location"
-                  {...register("meeting_location")}
+                  id="signature-date"
+                  label="Signature"
+                  {...register("date")}
                   fullWidth
                   multiline
-                  autoComplete="Meeting location"
+                  autoComplete="Signature"
                   variant="standard"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="membership-size"
-                  label="Possible Memebership size"
-                  {...register("membership_size")}
+                  id="signature-date"
+                  label="Date"
+                  {...register("date")}
                   fullWidth
                   multiline
-                  autoComplete="Meeting location"
+                  autoComplete="Signature"
                   variant="standard"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth variant="standard">
+                  <InputLabel htmlFor="group">Constitution</InputLabel>
+                  <Select
+                    disabled={loading}
+                    {...register("group")}
+                    required
+                    id="group"
+                    variant="standard"
+                    fullWidth
+                  >
+                    <MenuItem value="Religious">Approved</MenuItem>
+                    <MenuItem value="Alumni">Not Approved</MenuItem>
+                    <MenuItem value="Ethnic">Draft Only</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
-            <MDBox mt={4} mb={1}>
+            <MDBox mt={2} mb={1}>
               <MDButton variant="gradient" color="success" type="submit" fullWidth>
                 Update Club Info
               </MDButton>
