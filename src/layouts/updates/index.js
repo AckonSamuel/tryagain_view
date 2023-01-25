@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
+import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
 import { useForm } from "react-hook-form";
 import { clubUpdate } from "redux/slices/clubs/updateSlice";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -45,13 +46,26 @@ export default function UpdateClubForm() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Paper
-        elevation={9}
+      <Card
+        // elevation={9}
         sx={{
-          padding: "2em",
+          marginTop: "2em",
         }}
       >
-        <Typography variant="h5">Update club info</Typography>
+        <MDBox
+          mx={2}
+          mt={-3}
+          py={3}
+          px={2}
+          variant="gradient"
+          bgColor="success"
+          borderRadius="lg"
+          coloredShadow="success"
+        >
+          <MDTypography variant="h6" color="white">
+            Update club info
+          </MDTypography>
+        </MDBox>
         {error.length > 0 && (
           <MDBox mt={2}>
             <Typography variant="h5" color="red">
@@ -67,7 +81,14 @@ export default function UpdateClubForm() {
             </Typography>
           </MDBox>
         ) : (
-          <MDBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
+          <MDBox
+            component="form"
+            role="form"
+            sx={{
+              padding: "1em",
+            }}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
@@ -135,7 +156,7 @@ export default function UpdateClubForm() {
             </MDBox>
           </MDBox>
         )}
-      </Paper>
+      </Card>
     </DashboardLayout>
   );
 }

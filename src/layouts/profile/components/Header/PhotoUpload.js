@@ -54,6 +54,8 @@ export default function PhotoUpload({ size, title, regis }) {
               profile_photo: vad.profile_photo[0],
             };
 
+      console.log(data);
+
       dispatch(postUpload(data)).then((res) => {
         if (res.type === "post/postUpload/fulfilled") {
           setOpen(false);
