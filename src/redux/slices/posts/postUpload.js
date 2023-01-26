@@ -3,7 +3,7 @@ import axios from "axios";
 import BASE_URL from "redux/common";
 
 const initialState = {
-  photos: [],
+  post: [],
   error: "",
   loading: false,
 };
