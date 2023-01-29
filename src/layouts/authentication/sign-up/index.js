@@ -178,7 +178,9 @@ function Cover() {
                   {...register("password_confirmation")}
                   required
                 />
-                <p sx={{ color: "red", fontSize: "0.5em"}}>{errors.password_confirmation ? errors.password_confirmation.message : ""}</p>
+                <p sx={{ color: "red", fontSize: "0.5em" }}>
+                  {errors.password_confirmation ? errors.password_confirmation.message : ""}
+                </p>
               </FormControl>
             </MDBox>
             <MDBox mb={2}>
