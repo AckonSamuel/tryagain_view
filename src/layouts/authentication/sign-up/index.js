@@ -36,9 +36,7 @@ import { clubSignUp } from "redux/slices/clubs/registerSlice";
 
 const formSchema = Yup.object({
   email: Yup.string().email(),
-  password: Yup.string()
-    .min(4, "Password length should be at least 4 characters")
-    .max(12, "Password cannot exceed more than 12 characters"),
+  password: Yup.string(),
   password_confirmation: Yup.string().oneOf([Yup.ref("password")], "Passwords do not match"),
 }).required();
 
@@ -180,7 +178,7 @@ function Cover() {
                   {...register("password_confirmation")}
                   required
                 />
-                <p>{errors.password_confirmation ? errors.password_confirmation.message : ""}</p>
+                <p sx={{ color: "red", fontSize: "0.5em"}}>{errors.password_confirmation ? errors.password_confirmation.message : ""}</p>
               </FormControl>
             </MDBox>
             <MDBox mb={2}>
