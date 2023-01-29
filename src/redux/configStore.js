@@ -10,6 +10,10 @@ import postUploadSlice from "./slices/posts/postUpload";
 import clubUpdateSlice from "./slices/clubs/updateSlice";
 import myClubFetchSlice from "./slices/clubs/getMyClub";
 import clubLogoutSlice from "./slices/clubs/logoutSlice";
+import executiveCreateSlice from "./slices/clubs/executiveCreate";
+import executiveFetchSlice from "./slices/clubs/executivesFetch";
+import executiveDeleteSlice from "./slices/clubs/executiveDelete";
+import executiveEditSlice from "./slices/clubs/executiveUpdate";
 
 const MyMiddlewares = [logger, thunk];
 
@@ -24,6 +28,10 @@ const store = configureStore({
     clubUpdate: clubUpdateSlice.reducer,
     myClubFetch: myClubFetchSlice.reducer,
     clubLogout: clubLogoutSlice.reducer,
+    executiveCreate: executiveCreateSlice.reducer,
+    executiveFetch: executiveFetchSlice.reducer,
+    executiveDelete: executiveDeleteSlice.reducer,
+    executiveEdit: executiveEditSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -36,6 +44,7 @@ const store = configureStore({
           "club/clubUpdate/fulfilled",
           "post/postUpload/fulfilled",
           "post/postFetch/fulfilled",
+          "executive/executiveCreate/fulfilled",
         ],
       },
     }).concat(MyMiddlewares),

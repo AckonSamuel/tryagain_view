@@ -1,82 +1,55 @@
 // @mui material components
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Input from "@mui/material/Input";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
+import AddExecutive from "examples/Registrations/ExecutiveModal";
 
 // Data
+import { executiveFetch } from "redux/slices/clubs/executivesFetch";
+import RowActions from "./data/RowActions";
 
 function Tables() {
-  const [rows, setRows] = useState([
-    {
-      Portfolio: <Input />,
-      Name: <Input />,
-      Contact: <Input />,
-      Programme: <Input />,
-      Email: <Input />,
-      Signature: <Input />,
-      Date: <Input />,
-    },
-  ]);
+  const dispatch = useDispatch();
+  const executives = useSelector((state) => state.executiveFetch.executive);
 
-  const [add, setAdd] = useState(false);
-  const [remove, setRemove] = useState(false);
+  useEffect(() => {
+    dispatch(executiveFetch());
+  }, [dispatch]);
 
+  console.log(executives);
   const columns = [
-    { Header: "Portfolio", accessor: "Portfolio", width: "45%", align: "left" },
+    { Header: "Portfolio", accessor: "Portfolio", align: "left" },
     { Header: "Name", accessor: "Name", align: "left" },
     { Header: "Contact", accessor: "Contact", align: "center" },
     { Header: "Programme", accessor: "Programme", align: "center" },
     { Header: "Email", accessor: "Email", align: "center" },
-    { Header: "Signature", accessor: "Signature", align: "center" },
-    { Header: "Date", accessor: "Date", align: "center" },
+    { Header: "Actions", accessor: "Actions", align: "center" },
   ];
 
-  const handleAdd = () => {
-    setAdd(true);
-    console.log(add);
-  };
-
-  const handleRemove = () => {
-    setRemove(true);
-    console.log(remove);
-  };
-
-  useEffect(() => {
-    if (remove) {
-      setRemove(false);
-      setRows(rows.filter((row) => rows.indexOf(row) !== rows.length - 1));
-    }
-  }, [rows, remove]);
-
-  useEffect(() => {
-    if (add) {
-      setAdd(false);
-      const duplicateArray = [
-        {
-          Portfolio: <Input />,
-          Name: <Input />,
-          Contact: <Input />,
-          Programme: <Input />,
-          Email: <Input />,
-          Signature: <Input className="act" />,
-          Date: <Input />,
-        },
-      ];
-      setRows([...duplicateArray, ...rows]);
-      console.log(rows);
-    }
-  }, [add, rows]);
+  const rows = [];
+  const rowlet = [];
+  if (executives && executives.length > 0) {
+    executives.forEach((executive) => {
+      rows.push({
+        Name: executive.attributes.executive_name,
+        Portfolio: executive.attributes.portfolio,
+        Contact: executive.attributes.contact,
+        Programme: executive.attributes.programme,
+        Email: executive.attributes.email,
+        Actions: <RowActions executiveId={executive.id} executive={executive} />,
+      });
+    });
+  }
 
   return (
     <DashboardLayout>
@@ -100,15 +73,17 @@ function Tables() {
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
+                <AddExecutive />
+              </MDBox>
+              <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}
+                  rowlet={rowlet}
                   noEndBorder
                 />
-                <MDButton onClick={handleAdd}>Add input field</MDButton>
-                <MDButton onClick={handleRemove}>remove executive</MDButton>
               </MDBox>
             </Card>
           </Grid>
