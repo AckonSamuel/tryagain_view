@@ -33,16 +33,8 @@ import Icon from "@mui/material/Icon";
 import Tables from "layouts/tables";
 import Witness from "examples/Registrations/Witness";
 import RequiredDocuments from "examples/Registrations/RequiredDocuments";
-import ConfirmationEmail from "layouts/authentication/email";
 
 const routes = [
-  {
-    name: "ConfirmEmail",
-    key: "confirm email",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/confirm-email",
-    component: <ConfirmationEmail />,
-  },
   {
     type: "collapse",
     name: "Profile",

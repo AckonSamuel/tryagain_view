@@ -1,6 +1,6 @@
 // react-router-dom components
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // @mui material components
@@ -33,6 +33,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 import { clubSignUp } from "redux/slices/clubs/registerSlice";
+import ConfirmationEmail from "layouts/authentication/email";
 
 const formSchema = Yup.object({
   email: Yup.string().email(),
@@ -41,9 +42,10 @@ const formSchema = Yup.object({
 }).required();
 
 function Cover() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const loading = useSelector((state) => state.clubRegister.loading);
   const error = useSelector((state) => state.clubRegister.error);
@@ -79,7 +81,7 @@ function Cover() {
 
       dispatch(clubSignUp(data)).then((res) => {
         if (res.type === "club/clubSignUP/fulfilled") {
-          navigate("/confirm-email");
+          setSuccess(true);
         }
       });
     }
@@ -106,174 +108,178 @@ function Cover() {
             Fill the fields to get started
           </MDTypography>
         </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form" onSubmit={handleSubmit(showdata)}>
-            <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="Name"
-                variant="standard"
-                disabled={loading}
-                fullWidth
-                {...register("club_name", { required: true })}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                variant="standard"
-                disabled={loading}
-                fullWidth
-                {...register("email", { required: true })}
-              />
-              <p>{errors.email ? errors.email.message : ""}</p>
-            </MDBox>
-            <MDBox mb={2}>
-              <FormControl sx={{ width: "100%" }} variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  autoComplete="current-password"
-                  fullWidth
-                  disabled={loading}
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                  {...register("password", { required: true })}
-                />
-              </FormControl>
-            </MDBox>
-            <MDBox mb={2}>
-              <FormControl sx={{ width: "100%" }} variant="standard">
-                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                <Input
-                  id="out-basic"
-                  disabled={loading}
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Confirm Password"
-                  {...register("password_confirmation")}
-                  required
-                />
-                <p sx={{ color: "red", fontSize: "0.5em" }}>
-                  {errors.password_confirmation ? errors.password_confirmation.message : ""}
-                </p>
-              </FormControl>
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="integer"
-                label="Telephone number"
-                variant="standard"
-                disabled={loading}
-                fullWidth
-                {...register("telephone_number", { required: true })}
-              />
-              <p>{errors.phone_number ? errors.phone_number.message : ""}</p>
-            </MDBox>
-            <MDBox mb={2}>
-              <FormControl fullWidth variant="standard">
-                <InputLabel htmlFor="group">Group</InputLabel>
-                <Select
-                  disabled={loading}
-                  {...register("group")}
-                  required
-                  id="group"
-                  label="group"
+        {success ? (
+          <ConfirmationEmail />
+        ) : (
+          <MDBox pt={4} pb={3} px={3}>
+            <MDBox component="form" role="form" onSubmit={handleSubmit(showdata)}>
+              <MDBox mb={2}>
+                <MDInput
+                  type="text"
+                  label="Name"
                   variant="standard"
-                >
-                  <MenuItem value="Religious">Religious</MenuItem>
-                  <MenuItem value="Alumni">Alumni</MenuItem>
-                  <MenuItem value="Ethnic">Ethnic</MenuItem>
-                  <MenuItem value="Professional">Professional</MenuItem>
-                  <MenuItem value="College">College</MenuItem>
-                  <MenuItem value="Faculty">Faculty</MenuItem>
-                  <MenuItem value="Department">Department</MenuItem>
-                  <MenuItem value="Entertainment">Entertainment</MenuItem>
-                  <MenuItem value="Sports">Sports</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
-                </Select>
-              </FormControl>
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox disabled={loading} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;I agree the&nbsp;
-              </MDTypography>
-              <MDTypography
-                component="a"
-                href="#"
-                variant="button"
-                fontWeight="bold"
-                color="success"
-                textGradient
-              >
-                Terms and Conditions
-              </MDTypography>
-            </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton
-                variant="gradient"
-                disabled={loading}
-                color="success"
-                type="submit"
-                fullWidth
-              >
-                {loading ? "Creating club..." : "Join Clubs"}
-              </MDButton>
-            </MDBox>
-            {error.length > 0 && (
-              <MDBox mt={2}>
-                <MDTypography variant="h6" color="warning">
-                  Failed to Sign up. Please tryagain.
-                </MDTypography>
+                  disabled={loading}
+                  fullWidth
+                  {...register("club_name", { required: true })}
+                />
               </MDBox>
-            )}
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Already have an account?{" "}
+              <MDBox mb={2}>
+                <MDInput
+                  type="email"
+                  label="Email"
+                  variant="standard"
+                  disabled={loading}
+                  fullWidth
+                  {...register("email", { required: true })}
+                />
+                <p>{errors.email ? errors.email.message : ""}</p>
+              </MDBox>
+              <MDBox mb={2}>
+                <FormControl sx={{ width: "100%" }} variant="standard">
+                  <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                  <Input
+                    id="standard-adornment-password"
+                    autoComplete="current-password"
+                    fullWidth
+                    disabled={loading}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                    {...register("password", { required: true })}
+                  />
+                </FormControl>
+              </MDBox>
+              <MDBox mb={2}>
+                <FormControl sx={{ width: "100%" }} variant="standard">
+                  <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                  <Input
+                    id="out-basic"
+                    disabled={loading}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Confirm Password"
+                    {...register("password_confirmation")}
+                    required
+                  />
+                  <p sx={{ color: "red", fontSize: "0.5em" }}>
+                    {errors.password_confirmation ? errors.password_confirmation.message : ""}
+                  </p>
+                </FormControl>
+              </MDBox>
+              <MDBox mb={2}>
+                <MDInput
+                  type="integer"
+                  label="Telephone number"
+                  variant="standard"
+                  disabled={loading}
+                  fullWidth
+                  {...register("telephone_number", { required: true })}
+                />
+                <p>{errors.phone_number ? errors.phone_number.message : ""}</p>
+              </MDBox>
+              <MDBox mb={2}>
+                <FormControl fullWidth variant="standard">
+                  <InputLabel htmlFor="group">Group</InputLabel>
+                  <Select
+                    disabled={loading}
+                    {...register("group")}
+                    required
+                    id="group"
+                    label="group"
+                    variant="standard"
+                  >
+                    <MenuItem value="Religious">Religious</MenuItem>
+                    <MenuItem value="Alumni">Alumni</MenuItem>
+                    <MenuItem value="Ethnic">Ethnic</MenuItem>
+                    <MenuItem value="Professional">Professional</MenuItem>
+                    <MenuItem value="College">College</MenuItem>
+                    <MenuItem value="Faculty">Faculty</MenuItem>
+                    <MenuItem value="Department">Department</MenuItem>
+                    <MenuItem value="Entertainment">Entertainment</MenuItem>
+                    <MenuItem value="Sports">Sports</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
+                  </Select>
+                </FormControl>
+              </MDBox>
+              <MDBox display="flex" alignItems="center" ml={-1}>
+                <Checkbox disabled={loading} />
                 <MDTypography
-                  component={Link}
-                  to="/"
                   variant="button"
+                  fontWeight="regular"
+                  color="text"
+                  sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                >
+                  &nbsp;&nbsp;I agree the&nbsp;
+                </MDTypography>
+                <MDTypography
+                  component="a"
+                  href="#"
+                  variant="button"
+                  fontWeight="bold"
                   color="success"
-                  fontWeight="medium"
                   textGradient
                 >
-                  Sign in
+                  Terms and Conditions
                 </MDTypography>
-              </MDTypography>
+              </MDBox>
+              <MDBox mt={4} mb={1}>
+                <MDButton
+                  variant="gradient"
+                  disabled={loading}
+                  color="success"
+                  type="submit"
+                  fullWidth
+                >
+                  {loading ? "Creating club..." : "Join Clubs"}
+                </MDButton>
+              </MDBox>
+              {error.length > 0 && (
+                <MDBox mt={2}>
+                  <MDTypography variant="h6" color="warning">
+                    Failed to Sign up. Please tryagain.
+                  </MDTypography>
+                </MDBox>
+              )}
+              <MDBox mt={3} mb={1} textAlign="center">
+                <MDTypography variant="button" color="text">
+                  Already have an account?{" "}
+                  <MDTypography
+                    component={Link}
+                    to="/"
+                    variant="button"
+                    color="success"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    Sign in
+                  </MDTypography>
+                </MDTypography>
+              </MDBox>
             </MDBox>
           </MDBox>
-        </MDBox>
+        )}
       </Card>
     </CoverLayout>
   );
