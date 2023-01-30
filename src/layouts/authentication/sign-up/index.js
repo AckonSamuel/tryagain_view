@@ -79,7 +79,7 @@ function Cover() {
 
       dispatch(clubSignUp(data)).then((res) => {
         if (res.type === "club/clubSignUP/fulfilled") {
-          navigate("/");
+          navigate("/confirm-email");
         }
       });
     }
