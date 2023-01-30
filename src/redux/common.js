@@ -1,3 +1,3 @@
-const BASE_URL = "https://rails-t7lj.onrender.com";
+const BASE_URL = "https://rails-pdlt.onrender.com";
 
 export default BASE_URL;
