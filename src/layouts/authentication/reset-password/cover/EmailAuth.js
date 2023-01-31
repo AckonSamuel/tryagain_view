@@ -22,6 +22,9 @@ function EmailAuth() {
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const { getValues, handleSubmit, register } = useForm();
+  const [success, setSuccess] = useState(false);
+  const loading = useSelector((state) => state.resetPasswordEmail.loading);
+  const error = useSelector((state) => state.resetPasswordEmail.error);
 
   const handleSubmitted = () => {
     setSubmitted(true);
@@ -30,7 +33,10 @@ function EmailAuth() {
   useEffect(() => {
     if (submitted) {
       setSubmitted(false);
-      dispatch(resetPasswordEmail(getValues()));
+      dispatch(resetPasswordEmail(getValues())).then((res) => {
+        if (res.type === "club/resetPasswordEmail/fulfilled")
+        setSuccess(true);
+      });
       console.log(getValues());
     }
   }, [submitted]);
@@ -63,15 +69,28 @@ function EmailAuth() {
                 type="email"
                 label="Email"
                 variant="standard"
+                disabled={loading}
                 fullWidth
                 {...register("email")}
               />
             </MDBox>
             <MDBox mt={6} mb={1}>
-              <MDButton type="submit" variant="gradient" color="success" fullWidth>
+              <MDButton
+                type="submit"
+                variant="gradient"
+                color="success"
+                disabled={loading}
+                fullWidth
+              >
                 reset
               </MDButton>
             </MDBox>
+            {error && <MDTypography color="warning">Request unsuccessful</MDTypography>}
+            {success && (
+              <MDTypography color="success">
+                Reset instructions have been successfully sent to your email
+              </MDTypography>
+            )}
           </MDBox>
         </MDBox>
       </Card>

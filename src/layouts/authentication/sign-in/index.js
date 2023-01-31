@@ -183,6 +183,19 @@ function Basic() {
               </MDTypography>
             </MDTypography>
           </MDBox>
+          <MDBox textAlign="center">
+            <MDTypography
+              component={Link}
+              disabled={loading}
+              to="/email-for-password-reset"
+              variant="button"
+              color="warning"
+              fontWeight="medium"
+              textGradient
+            >
+              Forgot password?
+            </MDTypography>
+          </MDBox>
         </MDBox>
       </Card>
     </BasicLayout>
