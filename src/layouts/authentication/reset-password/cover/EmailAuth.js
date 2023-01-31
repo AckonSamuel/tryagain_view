@@ -34,8 +34,7 @@ function EmailAuth() {
     if (submitted) {
       setSubmitted(false);
       dispatch(resetPasswordEmail(getValues())).then((res) => {
-        if (res.type === "club/resetPasswordEmail/fulfilled")
-        setSuccess(true);
+        if (res.type === "club/resetPasswordEmail/fulfilled") setSuccess(true);
       });
       console.log(getValues());
     }
