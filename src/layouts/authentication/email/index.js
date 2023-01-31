@@ -12,8 +12,8 @@ function ConfirmationEmail() {
       alignItems="center"
     >
       <MDTypography variant="h6" color="dark" fontSize="0.8em">
-        Confirmation instructions have been to sent to your email for verification. Please check your
-        inbox.
+        Confirmation instructions have been to sent to your email for verification. Please check
+        your inbox.
       </MDTypography>
       <MDTypography variant="h6" color="warning" frontSize="0.9em">
         You have to confirm your email before you can sign in.

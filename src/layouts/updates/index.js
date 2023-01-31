@@ -141,7 +141,7 @@ export default function UpdateClubForm() {
                 <TextField
                   id="membership-size"
                   label="Possible Memebership size"
-                  {...register("membership_size")}
+                  {...register("possible_membership_size")}
                   fullWidth
                   multiline
                   autoComplete="Meeting location"

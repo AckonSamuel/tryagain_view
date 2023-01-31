@@ -14,6 +14,8 @@ import executiveCreateSlice from "./slices/clubs/executiveCreate";
 import executiveFetchSlice from "./slices/clubs/executivesFetch";
 import executiveDeleteSlice from "./slices/clubs/executiveDelete";
 import executiveEditSlice from "./slices/clubs/executiveUpdate";
+import resetPasswordEmailSlice from "./slices/clubs/resetPasswordEmail";
+import postPasswordResetSlice from "./slices/clubs/postPasswordReset";
 
 const MyMiddlewares = [logger, thunk];
 
@@ -32,6 +34,8 @@ const store = configureStore({
     executiveFetch: executiveFetchSlice.reducer,
     executiveDelete: executiveDeleteSlice.reducer,
     executiveEdit: executiveEditSlice.reducer,
+    resetPasswordEmail: resetPasswordEmailSlice.reducer,
+    postPasswordReset: postPasswordResetSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -45,6 +49,7 @@ const store = configureStore({
           "post/postUpload/fulfilled",
           "post/postFetch/fulfilled",
           "executive/executiveCreate/fulfilled",
+          "club/resetPasswordEmail/fulfilled",
         ],
       },
     }).concat(MyMiddlewares),

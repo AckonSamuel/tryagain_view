@@ -190,7 +190,7 @@ function Cover() {
               </MDBox>
               <MDBox mb={2}>
                 <MDInput
-                  type="integer"
+                  type="number"
                   label="Telephone number"
                   variant="standard"
                   disabled={loading}

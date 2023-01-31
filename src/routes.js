@@ -33,8 +33,22 @@ import Icon from "@mui/material/Icon";
 import Tables from "layouts/tables";
 import Witness from "examples/Registrations/Witness";
 import RequiredDocuments from "examples/Registrations/RequiredDocuments";
+import EmailAuth from "layouts/authentication/reset-password/cover/EmailAuth";
+import PasswordResetForm from "layouts/authentication/reset-password/cover/PasswordResetForm";
 
 const routes = [
+  {
+    name: "password_reset",
+    key: "password_reset",
+    route: "/password-reset-form",
+    component: <PasswordResetForm />,
+  },
+  {
+    name: "email_for_password_reset",
+    key: "email_for_password_reset",
+    route: "/email-for-password-reset",
+    component: <EmailAuth />,
+  },
   {
     type: "collapse",
     name: "Profile",

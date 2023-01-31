@@ -2,18 +2,11 @@
 import React, { useEffect, useState, forwardRef } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-// import DialogContent from "@mui/material/DialogContent";
-// import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-// import FormControl from "@mui/material/FormControl";
-// import Tooltip from "@mui/material/Tooltip";
-// import Input from "@mui/material/Input";
-// import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import { clubLogout } from "redux/slices/clubs/logoutSlice";
 import MDButton from "components/MDButton";
