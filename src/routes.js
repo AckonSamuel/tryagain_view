@@ -75,7 +75,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Club Update",
+    name: "Club Information",
     key: "update",
     icon: <Icon fontSize="small">edit</Icon>,
     route: "/edit",
@@ -99,18 +99,10 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Witness 1",
+    name: "Witnesses",
     key: "witness_one",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/first_witness",
-    component: <Witness />,
-  },
-  {
-    type: "collapse",
-    name: "Witness 2",
-    key: "witness_two",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/second_witness",
     component: <Witness />,
   },
   {
