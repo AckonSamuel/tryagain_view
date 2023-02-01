@@ -70,9 +70,7 @@ export default function UpdateClubForm() {
     dispatch(myClubFetch()).then((res) => {
       if (res.type === "club/myClubFetch/fulfilled") {
         handleup();
-      }
-      else
-      handleup();
+      } else handleup();
     });
   }, [dispatch, submitted]);
 
