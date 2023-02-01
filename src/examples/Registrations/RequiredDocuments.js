@@ -19,7 +19,6 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import ExpiredToken from "layouts/authentication/sign-in/ExpiredToken";
 
 // Data
 import { postUpload } from "redux/slices/posts/postUpload";
@@ -33,7 +32,6 @@ function RequiredDocuments() {
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
   const [failure, setFailure] = useState(false);
-  const [pop, setPop] = useState(false);
 
   const loading = useSelector((state) => state.postUpload.loading);
   const club = useSelector((state) => state.myClubFetch.club);
@@ -89,9 +87,6 @@ function RequiredDocuments() {
           console.log(club);
         }
         if (res.type === "post/postUpload/rejected") {
-          if (res.error && res.error.message === "Request failed with status code 401") {
-            setPop(true);
-          }
           setFailure(true);
           setSuccess(false);
         }
@@ -232,7 +227,6 @@ function RequiredDocuments() {
           </Grid>
         </Grid>
       </MDBox>
-      <ExpiredToken pop={pop} />
     </DashboardLayout>
   );
 }

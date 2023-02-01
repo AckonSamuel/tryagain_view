@@ -22,7 +22,7 @@
 
 // Material Dashboard 2 React layouts
 // import Dashboard from "layouts/dashboard";
-import Profile from "layouts/profile";
+// import Profile from "layouts/profile";
 import UpdateClubForm from "layouts/updates";
 import Logout from "layouts/authentication/sign-out";
 import SignIn from "layouts//authentication/sign-in";
@@ -49,14 +49,14 @@ const routes = [
     route: "/email-for-password-reset",
     component: <EmailAuth />,
   },
-  {
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Profile",
+  //   key: "profile",
+  //   icon: <Icon fontSize="small">person</Icon>,
+  //   route: "/profile",
+  //   component: <Profile />,
+  // },
   {
     // type: "collapse",
     name: "Sign In",
@@ -78,7 +78,7 @@ const routes = [
     name: "Club Update",
     key: "update",
     icon: <Icon fontSize="small">edit</Icon>,
-    route: "/profile/edit",
+    route: "/edit",
     component: <UpdateClubForm />,
   },
   {

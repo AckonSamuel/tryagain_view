@@ -16,7 +16,6 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import ExpiredToken from "layouts/authentication/sign-in/ExpiredToken";
 
 export default function UpdateClubForm() {
   const dispatch = useDispatch();
@@ -24,7 +23,6 @@ export default function UpdateClubForm() {
   const [submitted, setSubmitted] = useState(false);
   const loading = useSelector((state) => state.clubUpdate.loading);
   const error = useSelector((state) => state.clubUpdate.error);
-  const [pop, setPop] = useState(false);
 
   const { register, handleSubmit, getValues } = useForm();
 
@@ -42,9 +40,6 @@ export default function UpdateClubForm() {
         dispatch(clubUpdate(data)).then((res) => {
           if (res.type === "club/clubUpdate/fulfilled") {
             navigate("/profile");
-          }
-          if (res.error && res.error.message === "Request failed with status code 401") {
-            setPop(true);
           }
         });
       }
@@ -170,7 +165,6 @@ export default function UpdateClubForm() {
           </MDBox>
         )}
       </Paper>
-      <ExpiredToken pop={pop} />
     </DashboardLayout>
   );
 }

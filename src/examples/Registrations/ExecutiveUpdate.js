@@ -14,7 +14,6 @@ import { executiveFetch } from "redux/slices/clubs/executivesFetch";
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDTypography from "components/MDTypography";
-import ExpiredToken from "layouts/authentication/sign-in/ExpiredToken";
 
 export default function ExecutiveUpdate({ executive }) {
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ export default function ExecutiveUpdate({ executive }) {
   const [contact, setContact] = useState(executive.attributes.contact);
   const [portfolio, setPortfolio] = useState(executive.attributes.portfolio);
   const [email, setEmail] = useState(executive.attributes.email);
-  const [pop, setPop] = useState(false);
 
   const { register, getValues, handleSubmit } = useForm();
 
@@ -67,9 +65,6 @@ export default function ExecutiveUpdate({ executive }) {
           setOpen(false);
           setSuccess(true);
           dispatch(executiveFetch());
-        }
-        if (res.error && res.error.message === "Request failed with status code 401") {
-          setPop(true);
         }
       });
     }
@@ -171,7 +166,6 @@ export default function ExecutiveUpdate({ executive }) {
           {success && <MDTypography color="warning">Update successful</MDTypography>}
         </MDBox>
       </Dialog>
-      <ExpiredToken pop={pop} />
     </div>
   );
 }

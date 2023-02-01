@@ -12,7 +12,6 @@ import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
-import ExpiredToken from "layouts/authentication/sign-in/ExpiredToken";
 
 export default function AddExecutive() {
   const dispatch = useDispatch();
@@ -20,7 +19,6 @@ export default function AddExecutive() {
   const [scroll, setScroll] = useState("paper");
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [pop, setPop] = useState(false);
 
   const { register, getValues, handleSubmit } = useForm();
 
@@ -54,15 +52,12 @@ export default function AddExecutive() {
     if (submitted) {
       setSubmitted(false);
       const data = getValues();
-      setPop(false);
+
       dispatch(executiveCreate(data)).then((res) => {
         if (res.type === "executive/executiveCreate/fulfilled") {
           setOpen(false);
           setSuccess(true);
           dispatch(executiveFetch());
-        }
-        if (res.error && res.error.message === "Request failed with status code 401") {
-          setPop(true);
         }
       });
     }
@@ -150,10 +145,9 @@ export default function AddExecutive() {
             </Button>
           </DialogActions>
           {error && <MDTypography color="warning">Add executive unsuccessful</MDTypography>}
-          {success && <MDTypography color="warning">Add executive unsuccessful</MDTypography>}
+          {success && <MDTypography color="warning">Add executive successfully</MDTypography>}
         </MDBox>
       </Dialog>
-      <ExpiredToken pop={pop} />
     </div>
   );
 }
